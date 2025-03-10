@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nicholas Brand | Portfolio</title>
+  <link rel="icon" type="image/png" href="Brand.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts (Poppins) -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- AOS (Animate On Scroll) CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  
+  <!-- Inline CSS -->
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #ffffff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Vertical Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 250px; 
+      background: #050b14; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+
+    .navbar .profile-picture {
+      width: 120px;
+      height: 150px;
+      border-radius: 50%;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border: 2px solid #ffd700; /* Gold border */
+      object-fit: cover;
+    }
+
+    .navbar .profile-name {
+      font-size: 22px; /* Larger font size */
+      font-weight: 500;
+      color: #ffffff; /* White text color */
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .navbar .social-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .navbar .social-buttons a {
+      color: #ffffff; /* White icon color */
+      font-size: 20px; /* Icon size */
+      transition: color 0.3s;
+    }
+
+    .navbar .social-buttons a:hover {
+      color: #53a9e1; /* Light blue icon color on hover */
+    }
+
+    .navbar .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .navbar .nav-links a {
+      font-size: 16px;
+      font-weight: 500;
+      color: #ffffff; /* White text color */
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar .nav-links a i {
+      font-size: 20px;
+      color: #ffffff; /* White icon color */
+      transition: color 0.3s;
+    }
+
+    .navbar .nav-links a:hover {
+      color: #ffd700; /* Gold text color on hover */
+    }
+
+    .navbar .nav-links a:hover i {
+      color: #53a9e1; /* Light blue icon color on hover */
+    }
+
+    @media (max-width: 768px) {
+   .navbar {
+      width: 100%;
+      height: auto;
+      position: relative;
+      padding: 10px;
+    }
+   .hero, .section {
+      margin-left: 0;
+    }
+ }
+
+    /* Navbar Toggle Button */
+    .navbar-toggle {
+      position: absolute;
+      top: 95%;
+      left: 200px;
+      transform: translateY(-50%); /* Center vertically */
+      width: 40px;
+      height: 40px;
+      background-color: transparent; /* Transparent background */
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .navbar-toggle i {
+      color: #ffffff; 
+      font-size: 24px;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-toggle:hover i {
+      color: #53a9e1; 
+    }
+
+    /* Replacement Button */
+    .replacement-toggle {
+      position: fixed;
+      top: 50%; /* Vertically centered */
+      left: 20px; /* Positioned on the left */
+      transform: translateY(-50%); /* Center vertically */
+      width: 50px;
+      height: 50px;
+      background-color: #050b14; /* Dark background */
+      border: 2px solid #ffd700; /* Gold border */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1001; /* Above other content */
+      opacity: 0; /* Initially hidden */
+      visibility: hidden; /* Initially hidden */
+      transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+    }
+
+    .replacement-toggle i {
+      color: #ffd700; /* Gold icon */
+      font-size: 24px;
+      transition: color 0.3s ease; /* Smooth hover effect */
+    }
+
+    .replacement-toggle:hover i {
+      color: #53a9e1; /* Blue hover color */
+    }
+
+    .replacement-toggle.visible {
+      opacity: 1; /* Show button */
+      visibility: visible; /* Show button */
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 20px;
+      margin-right: -15px;
+      transition: margin-left 0.3s ease; /* Smooth transition */
+    }
+
+    /* When Navbar is Hidden */
+    .navbar.hidden {
+      transform: translateX(-470px); /* Hide navbar */
+    }
+
+    .main-content.navbar-hidden {
+      margin-left: -230px; 
+      margin-right: -15px;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: url('your-image.jpg') no-repeat center center/cover;
+      margin-left: 270px; /* Adjust for wider navbar */
+    }
+
+    .hero h1 {
+      font-size: 72px;
+      font-weight: 700;
+      color: #ffd700; /* Gold color */
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    /* Sections */
+    .section {
+      min-height: 100vh;
+      padding: 0 10%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      margin-left: 270px; /* Adjust for wider navbar */
+      opacity: 0;        /* For AOS fade-up */
+      transform: translateY(50px);
+    }
+
+    .section.aos-animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section h2 {
+      font-size: 48px;
+      font-weight: 600;
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+
+    .section p {
+      font-size: 18px;
+      font-weight: 400;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+
+    /* Testimonials Section */
+    #testimonials {
+      position: relative; 
+      padding: 0 20px;
+      margin-left: 270px;
+      text-align: center;
+      color: #ffd700;
+      overflow: hidden; /* Hide overflow from the pseudo-element */
+      margin-bottom: 0;
+    }
+
+    #testimonials::before {
+      content: '';
+      position: fixed; 
+      top: 0;
+      left: 0;
+      width: 100vw; /* Cover the full viewport width */
+      height: 100vh;
+      background: url('DALLE Generated GIS Themes Background.png') no-repeat center center/cover;
+      z-index: -1; /* Place the background behind the content */
+    }
+
+    .testimonials-container {
+      position: relative;
+      max-width: 800px;
+      width: calc(100% - 270px); /* Adjust width to account for navbar */
+      margin: 0 auto; /* Center the container */
+      padding: 0 20px; /* Add padding to keep text aligned */
+      text-align: center; /* Center-align text */
+      overflow: hidden; /* Hide overflow */
+    }
+
+    .testimonials-carousel {
+      position: relative;
+      max-width: 1500px;
+      width: 100%;
+      margin: 0 auto;
+      margin-left: 20px;
+      padding: 0 20px;
+      text-align: center;
+      overflow: hidden; /* Hide overflow */
+    }
+
+    .testimonial-wrapper {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 300%; /* 3 testimonials = 300% width */
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: transparent;
+    }
+
+    .testimonial-content {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .testimonial-text {
+      font-size: 18px;
+      font-style: italic;
+      color: #ffd700;
+    }
+
+    .testimonial-content.active {
+      opacity: 1;
+    }
+
+    .testimonial-author {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 10px;
+      color: #ffd700;
+    }
+
+    .testimonial-author a {
+      color: inherit; 
+      text-decoration: none;
+      transition: color 0.3s; 
+    }
+
+    .testimonial-author a:hover {
+      color: #53a9e1; 
+    }
+
+    .quote-icon-left,
+    .quote-icon-right {
+      color: #ffd700;
+      font-size: 24px;
+    }
+
+    .swiper-pagination {
+       position: relative;
+       margin-top: 20px;
+    }
+
+    .swiper-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      background: #ffd700;
+      opacity: 0.5;
+      transition: background-color 0.3s, opacity 0.3s; /* Smooth transition */
+    }
+
+    .swiper-pagination-bullet:hover {
+      background-color: #53a9e1; /* Light blue on hover */
+      opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: #ffd700; /* Gold for active dot */
+      opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+      opacity: 1;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #ffd700;
+      font-size: 24px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+
+    .swiper-button-next {
+     right: 5%; /* Move closer to the edge */
+    }
+
+    .swiper-button-prev {
+     left: 10px; /* Move closer to the edge */
+    }
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+      color: #53a9e1;
+    }
+
+    .play-pause {
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+      background: none;
+      border: none;
+      color: #ffd700;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.3s;
+    }
+
+    .play-pause:hover {
+     color: #53a9e1; /* Light blue on hover */
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #ffd700;
+      cursor: pointer;
+      padding: 10px;
+      transition: color 0.3s;
+      z-index: 1; /* Ensure arrows are above the background */
+    }
+
+    .arrow.left {
+      left: 0px; /* Position left arrow */
+    }
+
+    .arrow.right {
+      right: 0px; /* Position right arrow */
+    }
+
+    .arrow:hover {
+      color: #53a9e1; /* Light blue on hover */
+    }
+
+    .testimonial-dots {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border: 2px solid #ffd700;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, border-color 0.3s; /* Smooth transition */
+    }
+
+    .dot.active {
+      background-color: #ffd700;
+    }
+
+    .dot:hover {
+      border-color: #53a9e1; /* Light blue on hover */
+    }
+
+    /* Testimonials Link */
+    .testimonials-link {
+      color: inherit; /* Inherit the default color */
+      text-decoration: none; /* Remove underline */
+      transition: color 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+    .testimonials-link:hover {
+      color: #53a9e1; /* Change to signature blue on hover */
+    }
+
+    /* Ensure the icon inherits the hover color */
+    .testimonials-link:hover i {
+      color: #53a9e1; /* Change icon color to signature blue on hover */
+    }
+
+    /* Photo Carousel Styles */
+    /* Photo Carousel Styles */
+    #photo-carousel {
+      position: relative;
+      padding: 0;
+      text-align: center;
+      color: #ffd700;
+      overflow: hidden; /* Hide overflow */
+      width: calc(100% - 270px); /* Full width minus navbar */
+      margin-top: 0;
+    }
+
+    .photo-carousel {
+      position: relative;
+      width: 100%; /* Full width */
+      margin: 0 auto;
+      padding: 0;
+      text-align: center;
+      overflow: hidden; /* Hide overflow */
+      height: 300px; /* Set a fixed height */
+    }
+
+    .photo-carousel .swiper-wrapper {
+      display: flex;
+      align-items: center; /* Center photos vertically */
+    }
+
+    .photo-carousel .swiper-slide {
+      width: auto; /* Allow slides to take up only the space they need */
+      margin-right: 5px; /* Add space between slides */
+    }
+
+    .photo-carousel .photo-image {
+      max-width: 100%;
+      max-height: 100%;
+      height: 300px; /* Fixed height for all images */
+      width: auto; /* Maintain aspect ratio */
+      object-fit: cover; /* Ensure the image covers the slide */
+      border-radius: 10px; /* Optional: Add rounded corners */
+    }
+
+    .photo-carousel .swiper-pagination {
+      position: absolute;
+      bottom: 10px; /* Position dots at the bottom */
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    .photo-carousel .swiper-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      background: #ffd700;
+      opacity: 0.5;
+      transition: background-color 0.3s, opacity 0.3s; /* Smooth transition */
+    }
+
+    .photo-carousel .swiper-pagination-bullet:hover {
+      background-color: #53a9e1; /* Light blue on hover */
+      opacity: 1;
+    }
+
+    .photo-carousel .swiper-pagination-bullet-active {
+      background-color: #ffd700; /* Gold for active dot */
+      opacity: 1;
+    }
+
+    .photo-carousel .play-pause {
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+      background: none;
+      border: none;
+      color: #ffd700;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.3s;
+    }
+
+    .photo-carousel .play-pause:hover {
+      color: #53a9e1; /* Light blue on hover */
+    }
+
+    /* Footer */
+    .footer {
+      padding: 40px 20px;
+      text-align: center;
+      background: #050b14; /* Match navbar background color */
+      color: #ffffff;
+      width: 100%; /* Full width */
+      margin-left: 0; /* Remove left margin */
+    }
+
+    body.dark-mode .footer {
+      background: #050b14; /* Keep the same color in dark mode */
+    }
+
+    .footer a {
+      color: #ffffff; /* Gold by default */
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer a:hover {
+      color: #ffd700; /* Light blue on hover */
+    }
+
+    /* Dark Mode Toggle */
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #050b14; /* Navbar background color */
+      border: 3px solid #ffd700; /* Thicker gold border */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s, border-color 0.3s;
+      z-index: 1000;
+    }
+
+    .dark-mode-toggle i {
+      font-size: 24px;
+      color: #ffd700; /* Gold color for the icons */
+      transition: color 0.5s;
+    }
+
+    .dark-mode-toggle:hover i {
+      color: #53a9e1; /
+    }
+
+    /* Scroll-to-Top Button */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 80px; /* Position above the dark mode toggle */
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #050b14; /* Navbar background color */
+      border: 3px solid #ffd700; /* Thicker gold border */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.3s, visibility 0.3s, background-color 0.3s, border-color 0.3s;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .scroll-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-to-top i {
+      font-size: 24px;
+      color: #ffd700; 
+      transition: color 0.3s;
+    }
+
+    .scroll-to-top:hover i {
+      color: #53a9e1; 
+      border-color: #53a9e1; 
+    }
+
+
+    /* Animations (AOS) */
+    [data-aos] {
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- Vertical Navbar -->
+  <nav class="navbar">
+    <img src="Nicholas_Brand_Headshot1_02_09_2025.jpg" alt="Profile Picture" class="profile-picture">
+    <div class="profile-name">Nicholas Brand</div>
+    <div class="social-buttons">
+      <a href="https://precisionag.umn.edu/about-center/people/student-workers" target="_blank"><i class="fas fa-university"></i></a>
+      <a href="https://www.linkedin.com/in/nicholasbrandmn/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/NicholasBrandMN" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://t.me/NicholasBrand" target="_blank"><i class="fab fa-telegram"></i></a>
+      <a href="mailto:nicholasbrandmn@outlook.com"><i class="fas fa-envelope"></i></a>
+      <a href="index.html" ><i class="fas fa-home"></i></a>
+
+    </div>
+    <div class="nav-links">
+      <a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a>
+      <a href="#photo-carousel"><i class="fas fa-camera"></i> Photo Gallery</a>
+      <a href="#resume"><i class="fas fa-file-alt"></i> Resume</a>
+    </div>
+  <!-- Navbar Toggle Button -->
+  <div class="navbar-toggle" id="navbar-toggle">
+    <i class="fas fa-arrow-left"></i>
+  </div>
+  </nav>
+
+  <!-- Replacement Toggle Button -->
+  <div class="replacement-toggle" id="replacement-toggle">
+    <i class="fas fa-arrow-right"></i> <!-- Arrow pointing right -->
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" id="main-content">
+    
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="section" data-aos="fade-up">
+    <a href="index.html" class="testimonials-link"><h2>Testimonials</h2>
+    <div class="testimonials-carousel swiper">
+      <div class="swiper-wrapper">
+        <!-- Testimonial Slide 1 -->
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <p class="testimonial-text">
+              <i class="fas fa-quote-left quote-icon-left"></i>
+              "I’ve had the opportunity to work closely with Nicholas Brand for over a year and a half, both in the field and in the lab. In the field, he played a key role in precision nitrogen management research by collecting soil, water, and plant samples. He collected soil samples at two depths using a handheld soil probe and a hydraulic probe mounted on a truck, gathering approximately 40 samples per 100-acre field. For water sampling, Nicholas collected water every other week during the growing season from lysimeters. He also was responsible for assisting in the installation of Lysimeters and soil moisture sensors. 
+
+              Nicholas played a key role in sample processing and organization. He created labels for sampling, dried and weighed plant samples, and separated corn components into stalks, husks, and kernels for nitrogen analysis. In addition to collaborating with other students, he worked closely with university staff and field crews to ensure efficient collection and management of data and samples.
+              
+              In the lab, Nicholas was responsible for spectroscopy analysis, organizing soil samples, and creating lab protocols for equipment use. His attention to detail and commitment to accuracy ensured high-quality data collection and analysis. Beyond his technical skills, Nicholas is a hardworking and dedicated professional who approaches every task with focus and reliability. His strong work ethic, problem-solving mindset, and collaborative nature made him a valuable contributor to our research efforts. It was a pleasure working with him, and I highly appreciate his contributions to the team."
+              <i class="fas fa-quote-right quote-icon-right"></i>
+            </p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/toshi-mizuta/" target="_blank">Katsutoshi Mizuta</a></p>
+          </div>
+        </div>
+
+        <!-- Testimonial Slide 2 -->
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <p class="testimonial-text">
+              <i class="fas fa-quote-left quote-icon-left"></i>
+              "Another testimonial goes here. Exceptional service!"
+              <i class="fas fa-quote-right quote-icon-right"></i>
+            </p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/renzo-negrini/" target="_blank">Renzo Negrini</a></p>
+          </div>
+        </div>
+
+        <!-- Testimonial Slide 3 -->
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <p class="testimonial-text">
+              <i class="fas fa-quote-left quote-icon-left"></i>
+              "Nicholas Brand collected data using three different sensors, verified the data quality using a provided programming script on-site, and delivered them to me weekly in the summer of 2024. He demonstrated his excellence to work efficiently and independently and also to lead other workers.
+              He communicated effectively both regularly and in case of an emergency or difficulty. He accommodated the varying schedule that is common in agricultural experiments. Overall, he is the most reliable student I have worked with during my Ph.D. program."
+              <i class="fas fa-quote-right quote-icon-right"></i>
+            </p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/seiya-wakahara-85471614b/" target="_blank">Seiya Wakahara</a></p>
+          </div>
+        </div>
+
+        <!-- Testimonial Slide 4 -->
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <p class="testimonial-text">
+              <i class="fas fa-quote-left quote-icon-left"></i>
+              "Great collaborator, highly recommend!"
+              <i class="fas fa-quote-right quote-icon-right"></i>
+            </p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/yuxin-miao-65275629/" target="_blank">Yuxin Miao</a></p>
+          </div>
+        </div>
+
+        <!-- Testimonial Slide 5 -->
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <p class="testimonial-text">
+              <i class="fas fa-quote-left quote-icon-left"></i>
+              "Great collaborator, highly recommend!"
+              <i class="fas fa-quote-right quote-icon-right"></i>
+            </p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/junjun-lu-93333b317/" target="_blank">Junjun Lu</a></p>
+          </div>
+        </div>
+
+        <!-- Testimonial Slide 6 -->
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <p class="testimonial-text">
+              <i class="fas fa-quote-left quote-icon-left"></i>
+              "Working with Nicholas was an absolute game changer for me and my business! He took so much off my plate in helping my website and invoicing system become much more user friendly. I was able to tell him exactly what I needed and within days he would have it up and running. I am still using the system a year later! 
+              I highly recommend his services to anyone looking to elevate their online presence!"
+              <i class="fas fa-quote-right quote-icon-right"></i>
+            </p>
+            <p class="testimonial-author">- <a href="https://glowinggrimecleaning.com/" target="_blank">Danielle Pilarski</a></p>
+          </div>
+        </div>
+
+        <!-- Testimonial Slide 7 -->
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <p class="testimonial-text">
+              <i class="fas fa-quote-left quote-icon-left"></i>
+              "Great collaborator, highly recommend!"
+              <i class="fas fa-quote-right quote-icon-right"></i>
+            </p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/kaylee-niemeyer-409984292/" target="_blank">Kaylee Niemeyer</a></p>
+          </div>
+        </div>
+
+        <!-- Testimonial Slide 8 -->
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <p class="testimonial-text">
+              <i class="fas fa-quote-left quote-icon-left"></i>
+              "It is with great pride that I write this testimonial on behalf of Nicholas Brand, whom I have had the privilege of coaching from his preteen years through adulthood. Watching his growth, both in and out of the pool, has been one of the most rewarding experiences of my coaching career.
+
+              From the very beginning, Nicholas demonstrated a relentless work ethic that set him apart from his peers. He approached every practice, every set, and every challenge with a level of dedication that inspired not only his teammates, but also his coaches. Over the years, that drive has only strengthened, evolving from a simple desire to improve, into a disciplined commitment to excellence.
+              
+              Nicholas has grown into a person of remarkable integrity and character. He has faced obstacles with resilience, made difficult choices with honesty, and always upheld the values of sportsmanship, integrity, and respect. Even when no one was watching, he held himself to the highest standard; whether it was putting in extra effort after practice, mentoring younger teammates, or in coaching younger athletes, guiding and developing them to reach their own accolades.
+              
+              One of the most striking aspects of Nicholas' growth has been in his development as a leader. Initially a quiet and hardworking athlete, he has grown into a confident and supportive man, someone who lifts others up and fosters a culture of camaraderie and accountability. Whether through his words of encouragement before a race, or his actions in and out of competition, he has become a role model that others naturally gravitate toward.
+              
+              I have no doubt that Nicholas will continue to demonstrate admirable work ethic, integrity, leadership, and resilience in the next chapter of his life. His impact on our team and culture has been profound, and I am confident that wherever he goes, he will continue to inspire and uplift those around them."
+              <i class="fas fa-quote-right quote-icon-right"></i>
+            </p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/chris-mayer-3808401b4/" target="_blank">Chris Mayer</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Swiper Pagination -->
+      <div class="swiper-pagination"></div>
+
+      <!-- Swiper Navigation Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+
+      <div class="play-pause" id="play-pause">
+        <i class="fas fa-pause"></i> <!-- Default to pause icon -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Photo Carousel Section -->
+  <section id="photo-carousel" class="section" data-aos="fade-up">
+    <div class="photo-carousel swiper">
+      <div class="swiper-wrapper">
+        <!-- Photo Slide 1 -->
+        <div class="swiper-slide">
+          <img src="20240925_121948.jpg" alt="Photo 1" class="photo-image">
+        </div>
+        <!-- Photo Slide 2 -->
+        <div class="swiper-slide">
+          <img src="20240925_144953.jpg" alt="Photo 2" class="photo-image">
+        </div>
+        <!-- Photo Slide 3 -->
+        <div class="swiper-slide">
+          <img src="20240930_091700.jpg" alt="Photo 3" class="photo-image">
+        </div>
+        <!-- Photo Slide 4 -->
+        <div class="swiper-slide">
+          <img src="20240930_101222.jpg" alt="Photo 4" class="photo-image">
+        </div>
+        <!-- Photo Slide 5 -->
+        <div class="swiper-slide">
+          <img src="20240930_101233.jpg" alt="Photo 5" class="photo-image">
+        </div>
+        <!-- Photo Slide 6 -->
+        <div class="swiper-slide">
+          <img src="Nicholas_Brand_Irrigator_Picture_Becker.jpg" alt="Photo 6" class="photo-image">
+        </div>
+        <!-- Photo Slide 7 -->
+        <div class="swiper-slide">
+          <img src="Nicholas_Brand_Lab_Organized.jpg" alt="Photo 7" class="photo-image">
+        </div>
+        <!-- Photo Slide 8 -->
+        <div class="swiper-slide">
+          <img src="Nicholas_Brand_Sorting_Potatoes 2025.jpg" alt="Photo 8" class="photo-image">
+        </div>
+      </div>
+
+      <!-- Swiper Pagination -->
+      <div class="swiper-pagination"></div>
+
+      <!-- Play/Pause Button -->
+      <div class="play-pause" id="photo-play-pause">
+        <i class="fas fa-pause"></i> <!-- Default to pause icon -->
+      </div>
+    </div>
+  </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section" data-aos="fade-up">
+      <h2>Resume</h2>
+      <p>
+        <a href="Nicholas_Brand_2025_ Resume.pdf" download style="color: #ffd700; text-decoration: none; font-size: 24px;">
+          <i class="fas fa-download"></i> Download Resume
+        </a>
+      </p>
+    </section>
+
+  <!-- Footer -->
+  <div class="footer">
+  <section id="contact" class="section" data-aos="fade-up">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:NicholasBrandMN@outlook.com" style="color: #ffd700;">NicholasBrandMN@outlook.com</a></p>
+    <p>Telegram: <a href="https://t.me/NicholasBrand" target="_blank" style="color: #ffd700;">@NicholasBrand</a></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p>&copy; 2025 Nicholas Brand. All Rights Reserved.</p>
+  </section>  
+    
+  </div>
+
+  <!-- Dark Mode Toggle -->
+  <div class="dark-mode-toggle" id="dark-mode-toggle">
+    <i class="fas fa-moon" id="toggle-icon"></i>
+  </div>
+
+  <!-- Scroll-to-Top Button -->
+  <div class="scroll-to-top" id="scroll-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- AOS (Animate On Scroll) JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main Script -->
+  <script>
+    // Initialize AOS (Animate On Scroll)
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+
+    // Initialize Typed.js
+    document.addEventListener("DOMContentLoaded", function() {
+      const typedElement = document.querySelector(".typed");
+      if (typedElement) {
+        new Typed(".typed", {
+          strings: typedElement.getAttribute("data-typed-items").split(","),
+          typeSpeed: 100,
+          backSpeed: 50,
+          backDelay: 2000,
+          loop: true,
+        });
+      }
+    });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const toggleIcon = document.getElementById('toggle-icon');
+    const body = document.body;
+
+    // Check for stored dark mode preference
+    if (localStorage.getItem("dark-mode") === "enabled") {
+      body.classList.add("dark-mode");
+      toggleIcon.classList.remove("fa-moon");
+      toggleIcon.classList.add("fa-sun");
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem("dark-mode", "enabled");
+        toggleIcon.classList.remove('fa-moon');
+        toggleIcon.classList.add('fa-sun');
+      } else {
+        localStorage.setItem("dark-mode", "disabled");
+        toggleIcon.classList.remove('fa-sun');
+        toggleIcon.classList.add('fa-moon');
+      }
+    });
+
+    // Scroll-to-Top Button
+    const scrollToTopButton = document.getElementById('scroll-to-top');
+
+    window.addEventListener('scroll', () => {
+      const halfPageHeight = document.documentElement.scrollHeight / 2;
+
+      if (window.scrollY > halfPageHeight) {
+        scrollToTopButton.classList.add('show');
+      } else {
+        scrollToTopButton.classList.remove('show');
+      }
+    });
+
+    scrollToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Navbar Toggle
+    const navbarToggle = document.getElementById('navbar-toggle');
+    const replacementToggle = document.getElementById('replacement-toggle');
+    const navbar = document.querySelector('.navbar');
+    const mainContent = document.getElementById('main-content');
+
+    navbarToggle.addEventListener('click', () => {
+      navbar.classList.toggle('hidden');
+      mainContent.classList.toggle('navbar-hidden');
+      replacementToggle.classList.toggle('visible'); // Show/hide replacement button
+    });
+
+    replacementToggle.addEventListener('click', () => {
+      navbar.classList.toggle('hidden');
+      mainContent.classList.toggle('navbar-hidden');
+      replacementToggle.classList.toggle('visible'); // Show/hide replacement button
+    });
+
+    // Testimonials Slideshow
+    // Initialize Swiper
+    const swiper = new Swiper('.testimonials-carousel', {
+      loop: true, // Enable looping
+      slidesPerView: 1, // Number of slides per view
+      spaceBetween: 20, // Space between slides
+      pagination: {
+        el: '.swiper-pagination', // Pagination element
+        clickable: true, // Allow clicking on pagination bullets
+      },
+      navigation: {
+        nextEl: '.swiper-button-next', // Next button
+        prevEl: '.swiper-button-prev', // Previous button
+      },
+      autoplay: {
+        delay: 15000, // Autoplay delay in milliseconds
+        disableOnInteraction: false, // Continue autoplay after user interaction
+      },
+    });
+
+    const playPauseButton = document.getElementById('play-pause');
+    const playPauseIcon = playPauseButton.querySelector('i');
+
+    playPauseButton.addEventListener('click', () => {
+      if (swiper.autoplay.running) {
+        swiper.autoplay.stop();
+        playPauseIcon.classList.remove('fa-pause');
+        playPauseIcon.classList.add('fa-play');
+      } else {
+        swiper.autoplay.start();
+        playPauseIcon.classList.remove('fa-play');
+        playPauseIcon.classList.add('fa-pause');
+      }
+    });
+
+    // Initialize Photo Carousel Swiper
+    const photoSwiper = new Swiper('.photo-carousel', {
+      loop: true, // Enable looping
+      slidesPerView: 'auto', // Automatically adjust the number of visible slides
+      spaceBetween: 5, // Space between slides (5px as per your request)
+      centeredSlides: true, // Center the active slide
+      pagination: {
+        el: '.swiper-pagination', // Pagination element
+        clickable: true, // Allow clicking on pagination bullets
+      },
+      autoplay: {
+        delay: 3000, // Autoplay delay in milliseconds (3 seconds)
+        disableOnInteraction: false, // Continue autoplay after user interaction
+      },
+    });
+
+    const photoPlayPauseButton = document.getElementById('photo-play-pause');
+    const photoPlayPauseIcon = photoPlayPauseButton.querySelector('i');
+
+    photoPlayPauseButton.addEventListener('click', () => {
+      if (photoSwiper.autoplay.running) {
+        photoSwiper.autoplay.stop();
+        photoPlayPauseIcon.classList.remove('fa-pause');
+        photoPlayPauseIcon.classList.add('fa-play');
+      } else {
+        photoSwiper.autoplay.start();
+        photoPlayPauseIcon.classList.remove('fa-play');
+        photoPlayPauseIcon.classList.add('fa-pause');
+      }
+    });
+  </script>
+</body>
+</html>
