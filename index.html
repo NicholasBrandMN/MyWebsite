@@ -751,6 +751,86 @@
     [data-aos] {
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
+
+    /* ===== Mobile Overrides Only ===== */
+    @media (max-width: 768px) {
+     /* Navbar -> Mobile Header */
+     .navbar {
+       position: fixed;
+       width: 100%;
+       height: 60px;
+       padding: 10px;
+       flex-direction: row;
+       justify-content: space-between;
+       align-items: center;
+       overflow: hidden;
+       transition: height 0.3s ease;
+      }
+  
+      .navbar.expanded {
+        height: 100vh;
+        flex-direction: column;
+      }
+  
+      .profile-picture {
+        width: 40px !important;
+        height: 40px !important;
+        margin: 0 !important;
+      }
+  
+     .profile-name,
+     .nav-links {
+       display: none !important;
+      }
+  
+      .navbar.expanded .nav-links {
+        display: flex !important;
+        margin-top: 20px;
+      }
+  
+     .navbar-toggle {
+       position: static;
+       transform: none;
+       margin-left: auto;
+      }
+
+     /* Content Spacing */
+     .main-content, 
+     .hero, 
+     .section {
+       margin-left: 0;
+       padding-top: 80px;
+      }
+  
+      /* Typography */
+      .hero h1 { font-size: 36px; }
+      .hero p { font-size: 18px; }
+      .section h2 { font-size: 32px; }
+  
+      /* Projects Grid */
+      .projects-grid {
+       grid-template-columns: 1fr;
+       gap: 30px;
+      }
+  
+     .project-preview {
+       width: 100%;
+       height: 200px;
+      }
+  
+      /* Testimonials */
+       #testimonials { 
+       margin-left: 0;
+       padding: 20px;
+      }
+  
+      /* Touch Targets */
+      a, button, .nav-links a {
+        min-width: 48px;
+        min-height: 48px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1214,6 +1294,34 @@
         playPauseIcon.classList.add('fa-pause');
       }
     });
+
+
+    // ===== Mobile-Specific Toggle Logic =====
+    // ===== Integrated Toggle Logic =====
+    function handleNavbarToggle() {
+      if (window.innerWidth <= 768) {
+        navbar.classList.toggle('expanded'); // Mobile toggle
+      } else {
+        // Desktop toggle logic
+        navbar.classList.toggle('hidden');
+        mainContent.classList.toggle('navbar-hidden');
+        replacementToggle.classList.toggle('visible');
+      }
+    }
+
+    // Navbar Toggle - Integrated Version
+    navbarToggle.addEventListener('click', handleNavbarToggle);
+    replacementToggle.addEventListener('click', handleNavbarToggle);
+
+    // Close mobile menu when clicking links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+         navbar.classList.remove('expanded');
+        }
+      });
+    });
+
   </script>
 </body>
 </html>
