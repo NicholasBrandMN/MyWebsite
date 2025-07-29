@@ -15,8 +15,12 @@
   <!-- AOS (Animate On Scroll) CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <!-- Swiper CSS & Button (Required for proper layout) -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+  <!-- Skeleton CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
   
   <!-- Inline CSS -->
   <style>
@@ -40,6 +44,16 @@
       color: inherit;
       text-decoration: none;
     }
+
+    h3 {
+      color: #000000; /* black in light mode */
+      transition: color 0.5s ease;
+    }
+
+    body.dark-mode h3 {
+      color: #ffd700; /* gold in dark mode */
+    }
+
 
     /* Vertical Navbar */
     .navbar {
@@ -133,77 +147,44 @@
     }
  }
 
-    /* Navbar Toggle Button */
-    .navbar-toggle {
-      position: absolute;
-      top: 95%;
-      left: 200px;
-      transform: translateY(-50%); /* Center vertically */
-      width: 40px;
-      height: 40px;
-      background-color: transparent; /* Transparent background */
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 1001;
-    }
-
-    .navbar-toggle i {
-      color: #ffffff; 
-      font-size: 24px;
-      transition: color 0.3s ease;
-    }
-
-    .navbar-toggle:hover i {
-      color: #53a9e1; 
-    }
-
-    /* Replacement Button */
+    /* ===== Navbar Toggle System ===== */
+    /* Base Toggle Button Styles */
+    .navbar-toggle,
     .replacement-toggle {
       position: fixed;
-      top: 50%; /* Vertically centered */
-      left: 20px; /* Positioned on the left */
-      transform: translateY(-50%); /* Center vertically */
-      width: 50px;
-      height: 50px;
-      background-color: #050b14; /* Dark background */
-      border: 2px solid #ffd700; /* Gold border */
+      width: 45px;
+      height: 45px;
+      background: #050b14;
+      border: 2px solid #ffd700;
       border-radius: 50%;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 1001; /* Above other content */
-      opacity: 0; /* Initially hidden */
-      visibility: hidden; /* Initially hidden */
-      transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+      z-index: 1100;
+      transition: all 0.3s ease;
+      bottom: 20px;
+      left: 20px;
     }
 
-    .replacement-toggle i {
-      color: #ffd700; /* Gold icon */
-      font-size: 24px;
-      transition: color 0.3s ease; /* Smooth hover effect */
+    .navbar-toggle:hover,
+    .replacement-toggle:hover {
+      color: #53a9e1;
+      border-color: #53a9e1;
     }
 
-    .replacement-toggle:hover i {
-      color: #53a9e1; /* Blue hover color */
+    /* Replacement Toggle (Initially Hidden) */
+    .replacement-toggle {
+      opacity: 0;
+      visibility: hidden;
     }
 
     .replacement-toggle.visible {
-      opacity: 1; /* Show button */
-      visibility: visible; /* Show button */
+      opacity: 1;
+      visibility: visible;
     }
 
-    /* Main Content */
-    .main-content {
-      margin-left: 20px;
-      margin-right: -15px;
-      transition: margin-left 0.3s ease; /* Smooth transition */
-    }
-
-    /* When Navbar is Hidden */
     .navbar.hidden {
       transform: translateX(-470px); /* Hide navbar */
     }
@@ -211,6 +192,27 @@
     .main-content.navbar-hidden {
       margin-left: -230px; 
       margin-right: -15px;
+    }
+
+    /* ===== Accessibility Improvements ===== */
+    .navbar-toggle:focus,
+    .replacement-toggle:focus {
+      outline: 2px solid #53a9e1;
+      outline-offset: 2px;
+    }
+
+    /* ===== Animation Smoothing ===== */
+    .navbar {
+      transition: 
+        transform 0.3s ease-out,
+        height 0.3s ease;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 20px;
+      margin-right: -15px;
+      transition: margin-left 0.3s ease; /* Smooth transition */
     }
 
     /* Hero Section */
@@ -383,10 +385,6 @@
       text-align: left;
     }
 
-    #about h3 {
-      color: #ffd700; /* Gold color */
-    }
-
     /* Skills Section */
     #skills {
       text-align: center; 
@@ -424,13 +422,59 @@
     }
 
     /* Testimonials Section */
-    #testimonials {
-      position: relative; 
-      padding: 0 20px;
-      margin-left: 270px;
+    #testimonials h2 {
+      color: white !important;
+    }
+
+    .testimonial-carousel {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 40px;
+      padding-bottom: 60px;
+    }
+
+    .testimonial-box {
+      border-radius: 12px;
+      padding: 20px;
       text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .testimonial-box p {
+      font-size: 16px;
+      font-style: italic;
+      margin-bottom: 10px;
       color: #ffd700;
-      overflow: hidden; /* Hide overflow from the pseudo-element */
+    }
+
+    .testimonial-box h4 {
+      font-size: 14px;
+      color: #ffd700;
+      margin: 0;
+    }
+
+    .testimonial-author a {
+      text-decoration: none;
+      color: #ffd700;
+      transition: color 0.3s ease;
+    }
+
+    .testimonial-author a:hover {
+      color: #53a9e1;
+      text-decoration: underline;
+    }
+
+
+    /* Flex container for controls */
+    .testimonial-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      margin-top: 20px;
+      position: relative;
     }
 
     #testimonials::before {
@@ -438,224 +482,67 @@
       position: fixed; 
       top: 0;
       left: 0;
-      width: 100vw; /* Cover the full viewport width */
+      width: 100vw;
       height: 100vh;
       background: url('DALLE Generated GIS Themes Background.png') no-repeat center center/cover;
-      z-index: -1; /* Place the background behind the content */
+      z-index: -1;
     }
 
-    .testimonials-container {
-      position: relative;
-      max-width: 800px;
-      width: calc(100% - 270px); /* Adjust width to account for navbar */
-      margin: 0 auto; /* Center the container */
-      padding: 0 20px; /* Add padding to keep text aligned */
-      text-align: center; /* Center-align text */
-      overflow: hidden; /* Hide overflow */
-    }
-
-    .testimonials-carousel {
-      position: relative;
-      max-width: 1500px;
-      width: 100%;
-      margin: 0 auto;
-      margin-left: 20px;
-      padding: 0 20px;
-      text-align: center;
-      overflow: hidden; /* Hide overflow */
-    }
-
-    .testimonial-wrapper {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-      width: 300%; /* 3 testimonials = 300% width */
-    }
-
-    .swiper {
-      width: 100%;
-      height: 100%;
-    }
-
-    .swiper-slide {
+    /* Arrows */
+    .swiper-button-prev,
+    .swiper-button-next {
+      position: static; /* override Swiper’s absolute */
+      color: #ffd700;
+      font-size: 18px;
+      width: 32px;
+      height: 10px;
+      cursor: pointer;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      background: transparent;
+      padding-top: 10px 
     }
-
-    .testimonial-content {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 800px;
-      margin: 0 auto;
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+      display: none;
     }
-
-    .testimonial-text {
-      font-size: 18px;
-      font-style: italic;
-      color: #ffd700;
-    }
-
-    .testimonial-content.active {
-      opacity: 1;
-    }
-
-    .testimonial-author {
-      font-size: 16px;
-      font-weight: 600;
-      margin-top: 10px;
-      color: #ffd700;
-    }
-
-    .testimonial-author a {
-      color: inherit; 
-      text-decoration: none;
-      transition: color 0.3s; 
-    }
-
-    .testimonial-author a:hover {
-      color: #53a9e1; 
-    }
-
-    .quote-icon-left,
-    .quote-icon-right {
-      color: #ffd700;
-      font-size: 24px;
-    }
-
-    .swiper-pagination {
-       position: relative;
-       margin-top: 20px;
-    }
-
-    .swiper-pagination-bullet {
-      width: 12px;
-      height: 12px;
-      background: #ffd700;
-      opacity: 0.5;
-      transition: background-color 0.3s, opacity 0.3s; /* Smooth transition */
-    }
-
-    .swiper-pagination-bullet:hover {
-      background-color: #53a9e1; /* Light blue on hover */
-      opacity: 1;
-    }
-
-    .swiper-pagination-bullet-active {
-      background-color: #ffd700; /* Gold for active dot */
-      opacity: 1;
-    }
-
-    .swiper-pagination-bullet-active {
-      opacity: 1;
-    }
-
-    .swiper-button-next,
-    .swiper-button-prev {
-      color: #ffd700;
-      font-size: 24px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-    }
-
-    .swiper-button-next {
-     right: 5%; /* Move closer to the edge */
-    }
-
-    .swiper-button-prev {
-     left: 10px; /* Move closer to the edge */
-    }
-
-    .swiper-button-next:hover,
-    .swiper-button-prev:hover {
+    .swiper-button-prev:hover,
+    .swiper-button-next:hover {
       color: #53a9e1;
     }
 
-    .play-pause {
-      position: absolute;
-      bottom: 10px;
-      left: 20px;
+    /* Play/Pause button */
+    #toggleAutoplay {
       background: none;
       border: none;
       color: #ffd700;
-      font-size: 24px;
+      font-size: 22px;
       cursor: pointer;
-      z-index: 10;
-      transition: color 0.3s;
+      transition: color 0.3s ease, text-shadow 0.3s ease
     }
 
-    .play-pause:hover {
-     color: #53a9e1; /* Light blue on hover */
+    #toggleAutoplay:hover {
+      color: #53a9e1;
     }
 
-    .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      font-size: 28px;
-      color: #ffd700;
-      cursor: pointer;
-      padding: 10px;
-      transition: color 0.3s;
-      z-index: 1; /* Ensure arrows are above the background */
-    }
-
-    .arrow.left {
-      left: 0px; /* Position left arrow */
-    }
-
-    .arrow.right {
-      right: 0px; /* Position right arrow */
-    }
-
-    .arrow:hover {
-      color: #53a9e1; /* Light blue on hover */
-    }
-
-    .testimonial-dots {
+    .resume-download {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 1rem;
     }
 
-    .dot {
-      width: 12px;
-      height: 12px;
-      border: 2px solid #ffd700;
-      border-radius: 50%;
-      display: inline-block;
-      margin: 0 5px;
-      cursor: pointer;
-      transition: background-color 0.3s, border-color 0.3s; /* Smooth transition */
+    .resume-download a {
+      color: #ffd700;
+      text-decoration: none;
+      font-size: 24px;
+      transition: color 0.3s ease;
     }
 
-    .dot.active {
-      background-color: #ffd700;
-    }
-
-    .dot:hover {
-      border-color: #53a9e1; /* Light blue on hover */
-    }
-
-    /* Testimonials Link */
-    .testimonials-link {
-      color: inherit; /* Inherit the default color */
-      text-decoration: none; /* Remove underline */
-      transition: color 0.3s ease; /* Smooth transition for hover effect */
-    }
-
-    .testimonials-link:hover {
-      color: #53a9e1; /* Change to signature blue on hover */
-    }
-
-    /* Ensure the icon inherits the hover color */
-    .testimonials-link:hover i {
-      color: #53a9e1; /* Change icon color to signature blue on hover */
+    .resume-download a:hover {
+      color: #53a9e1;
     }
 
     /* Footer */
@@ -835,7 +722,11 @@
 </head>
 <body>
   <!-- Vertical Navbar -->
-  <nav class="navbar">
+    <!-- Navbar Toggle Button -->
+  <div class="navbar-toggle" id="navbar-toggle">
+    <i class="fas fa-arrow-left"></i>
+  </div>
+  <nav class="navbar" id="navbar">
     <img src="Nicholas_Brand_Headshot1_02_09_2025.jpg" alt="Profile Picture" class="profile-picture">
     <div class="profile-name">Nicholas Brand</div>
     <div class="social-buttons">
@@ -854,10 +745,6 @@
       <a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a>
       <a href="#resume"><i class="fas fa-file-alt"></i> Resume</a>
     </div>
-  <!-- Navbar Toggle Button -->
-  <div class="navbar-toggle" id="navbar-toggle">
-    <i class="fas fa-arrow-left"></i>
-  </div>
   </nav>
 
   <!-- Replacement Toggle Button -->
@@ -873,7 +760,7 @@
   <div class="hero" id="hero">
     <div>
       <h1>Nicholas Brand</h1>
-      <p><span class="typed" data-typed-items="Researcher, Geospatial Analyst, Field Supervisor, Web Developer, Cartographer, Lab Technician"></span></p>
+      <p><span class="typed" data-typed-items="Researcher, Geospatial Analyst, Field Coordinator, Web Developer, Lab Technician"></span></p>
     </div>
   </div>
 
@@ -887,26 +774,26 @@
     <ul>I am currently seeking a role as a <strong>GIS Technician</strong>, <strong>Geospatial Analyst</strong>, or <strong>Web Developer</strong> where I can apply my technical skills and research experience to contribute to innovative projects. I thrive in collaborative environments that encourage professional growth and provide opportunities to expand my expertise in GIS applications.</ul>
 
     <!-- Work Experience -->
-    <h2>Work Experience</h2>
+   <h2 style="padding-top: 150px">Relevant Work Experience</h2>
     <ul>
-      <li>
+      <p>
         <h3>UMN, Precision Agriculture - Researcher / Field Coordinator</h3> (May 2024 - Present)
         <ul>
-          <li>Led on-site field teams for soil, water, and crop sampling using various tools: Lysimeters, Dualex, Fieldscan Crop Circle Phenotype, Dualex.</li>
+          <li>Communicated directly with stakeholders to coordinate on-site field teams, (for soil, water, and crop sampling using various tools: Lysimeters, Dualex, Fieldscan Crop Circle Phenom) handle perscriptions with farmers, and share research with the public.</li>
          <li>Built Python and R scripts to process and analyze large datasets for field and lab efficiency.</li>
           <li>Led team in developing Precision Agriculture On-Farm Research Network Website and maintaining the Precision Agriculture Center Website.</li>
           <li>Performed advanced geospatial analysis using LiDAR data, drone imagery, and weather data to create a robust geospatial database in QGIS, SMS Basic, ArcGIS, and Yield Editor.</li>
         </ul>
-      </li>
-      <li>
-        <h3>City of Winona, Park & Rec - Assistant General Manager</h3> (April 2023 - May 2024)
+      </p>
+      <p>
+        <h3>City of Winona, Park & Rec - Assistant Manager</h3> (April 2023 - May 2024)
         <ul>
           <li>Used geographic data to create new digital maps for updated Trail & Street maintenance.</li>
           <li>Aided trail construction by creating new maps, analyzing soil integrity, and assessing erosion likelihood.</li>
           <li>Managed 3 public facilities and assisted with Adult Sports and Special Events throughout Winona.</li>
         </ul>
-      </li>
-      <li>
+      </p>
+      <p>
         <h3>UMN, Precision Agriculture - Internship</h3> (May 2022 - July 2023)
         <ul>
           <li>Measured boundary lines using survey equipment to update maps.</li>
@@ -914,49 +801,102 @@
           <li>Collected soil, water, plant, and air samples from lysimeters, fields, streams, and collection areas.</li>
           <li>Performed geochemical analysis with pXRF & XRF spectrometers of thousands of samples.</li>
         </ul>
-      </li>
+      </p>
+      <p>
+        <h3>City of Winona, Park & Rec - Aquatic Assistant Manager / Site Manager</h3> (May 2017 - August 2021)
+        <ul>
+          <li>Measured boundary lines using survey equipment to update maps.</li>
+          <li>Used and organized source data from Landsat & Drone imagery.</li>
+          <li>Collected soil, water, plant, and air samples from lysimeters, fields, streams, and collection areas.</li>
+          <li>Performed geochemical analysis with pXRF & XRF spectrometers of thousands of samples.</li>
+        </ul>
+      </p>
     </ul>
 
     <!-- Education -->
-    <h2>Education</h2>
+    <h2 style="padding-top: 150px">Education</h2>
     <ul>
-      <li>
+      <p>
         <h3>Arizona State University - Geographic Information Science (BS)</h3> (August 2023 - May 2025)
         <ul>
           <li>Relevant Courses: Fundamentals of Coding, Geographic Info Science 1-3, Stats for Geography & Planning, Adv Stats Geography & Planning, Cartography & Georepresentation, Geodesign and Urban Planning, Env Mgmt Systems & Strategy, Remote Sensing & Geo Analysis of Natural Resources & Environment, Basic Soil Science.</li>
         </ul>
-      </li>
+      </p>
     </ul>
 
     <!-- Skills Section -->
-    <h2>Skills</h2>
+    <h2 style="padding-top: 150px">Skills</h2>
     <ul>
-      <li>
+      <p>
         <h3>Programming Languages:</h3> 
          <ul>
           <li>Java, C++, Python, JavaScript, HTML/CSS, SQL, C, R, Bash</li>
          </ul>
-      </li>
-      <li>
+      </p>
+      <p>
         <h3>Tools and Platforms:</h3> 
          <ul>
           <li>GitHub, Windows, Esri Suite (ArcGIS, Collector, etc.), Visual Studio, RStudio, Web Soil Survey, Citrix, GoDaddy, Squarespace, Drupal, MNTopo, SMS Basic, Yield Editor, QGIS, PlanetGIS, USGS Landsat, MNTopo</li>
          </ul>
-      </li>
+      </p>
     </ul>
 
     <!-- Certificates Section -->
     <div id="certificates">
-      <h2>Certificates</h2>
+      <h2 style="padding-top: 150px">Certificates and Achievements</h2>
       <p>My certifications and achievements.</p>
+
+      <div class="project">
+        <h3 class="project-title">
+          <a href="https://www.michaelsutter.com/ediploma?fn=diplomastatuscheck&key=02000000eae6251f76ac19b3e94b00dcb61672fe320e8b7b8525a4dfa1d687c0ead08ec8bb221b0457e607596da8fdc747271b4fd44b606e6861cb1b01ddc30d8da89373" target="_blank">
+            Bachelor's of Science Degree
+          </a>
+        </h3>
+        <div class="project-preview">
+          <div class="website-preview">
+            <img src="Nicholas_Brand_Bachelor'sOfScienceDegree.jpg" alt="Effect of Slope & Climate on Yield">
+            <div class="website-overlay">
+              <a href="https://www.michaelsutter.com/ediploma?fn=diplomastatuscheck&key=02000000eae6251f76ac19b3e94b00dcb61672fe320e8b7b8525a4dfa1d687c0ead08ec8bb221b0457e607596da8fdc747271b4fd44b606e6861cb1b01ddc30d8da89373" target="_blank" class="visit-button">
+                Visit Website <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- Projects Section -->
   <section id="projects" class="section" data-aos="fade-up">
-    <h2>Projects</h2>
+    <h2 style="padding-top: 150px">Projects</h2>
     <div class="projects-grid">
+      
       <!-- Project 1 -->
+      <div class="project">
+        <h3 class="project-title">
+          <a href="https://storymaps.arcgis.com/stories/d314202d38454971a29d6328d83044bf" target="_blank">
+            Liverpool Race Riots 1919
+          </a>
+        </h3>
+        <div class="project-preview">
+          <iframe src="https://storymaps.arcgis.com/stories/d314202d38454971a29d6328d83044bf" title="Project 1"></iframe>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project">
+        <h3 class="project-title">
+          <a href="https://storymaps.arcgis.com/stories/57c9f44fd1df4155b980de331d5c0114" target="_blank">
+            Superior National Forest CHM and Classification
+          </a>
+        </h3>
+        <div class="project-preview">
+          <iframe src="https://storymaps.arcgis.com/stories/57c9f44fd1df4155b980de331d5c0114" title="Project 2"></iframe>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
       <div class="project">
         <h3 class="project-title">
           <a href="https://storymaps.arcgis.com/stories/f5548d826a5c473ea3937c961cf7f769" target="_blank">
@@ -968,7 +908,7 @@
         </div>
       </div>
 
-      <!-- Project 2 -->
+      <!-- Project 4 -->
       <div class="project">
         <h3 class="project-title">
           <a href="https://storymaps.arcgis.com/stories/b13cecab5aff4da1b635a9de57c93373" target="_blank">
@@ -980,7 +920,7 @@
         </div>
       </div>
 
-      <!-- Project 3 -->
+      <!-- Project 5 -->
       <div class="project">
         <h3 class="project-title">
           <a href="https://precisionag.umn.edu/farm-precision-agriculture-research-network" target="_blank">
@@ -1002,7 +942,7 @@
         </div>
       </div>
 
-      <!-- Project 4 -->
+      <!-- Project 6 -->
       <div class="project">
         <h3 class="project-title">
           <a href="Nicholas_Brand_PNM.jpeg" target="_blank">
@@ -1024,7 +964,7 @@
         </div>
       </div>
 
-      <!-- Project 5 -->
+      <!-- Project 7 -->
       <div class="project">
         <h3 class="project-title">
           <a href="https://www.canva.com/design/DAGllNXj2mg/rVrN8Y7-i2sPTEZ8WpgU6w/view?utm_content=DAGllNXj2mg&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hf385060c9b" target="_blank">
@@ -1051,114 +991,97 @@
 
   <!-- Testimonials Section -->
   <section id="testimonials" class="section" data-aos="fade-up">
-    <a href="photos.html" class="testimonials-link"><h2>Testimonials</h2>
-    <div class="testimonials-carousel swiper">
+    <h2 style="padding-top: 150px">Testimonials</h2>
+
+
+    <div class="swiper-container testimonial-carousel">
       <div class="swiper-wrapper">
-        <!-- Testimonial Slide 1 -->
-        <div class="swiper-slide">
-          <div class="testimonial-content">
-            <p class="testimonial-text">
-              <i class="fas fa-quote-left quote-icon-left"></i>
-              "Nicholas played a key role in sample processing and organization, creating labels for sampling, drying and weighing plant samples, and separating corn components for nitrogen analysis. His attention to detail and commitment to accuracy ensured high-quality data collection and analysis."
-              <i class="fas fa-quote-right quote-icon-right"></i>
-            </p>
-            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/toshi-mizuta/" target="_blank">Katsutoshi Mizuta</a></p>
-          </div>
+
+        <!-- 1 -->
+        <div class="swiper-slide testimonial-box">
+          <p class="testimonial-text">
+            <i class="fas fa-quote-left"></i>
+            Nicholas played a key role in sample processing and organization, creating labels for sampling, drying and weighing plant samples, and separating corn components for nitrogen analysis. His attention to detail and commitment to accuracy ensured high-quality data collection and analysis.
+            <i class="fas fa-quote-right"></i>
+          </p>
+          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/toshi-mizuta/" target="_blank">Katsutoshi Mizuta</a></p>
         </div>
 
-        <!-- Testimonial Slide 2 -->
-        <div class="swiper-slide">
-          <div class="testimonial-content">
-            <p class="testimonial-text">
-              <i class="fas fa-quote-left quote-icon-left"></i>
-              "Another testimonial goes here. Exceptional service!"
-              <i class="fas fa-quote-right quote-icon-right"></i>
-            </p>
-            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/renzo-negrini/" target="_blank">Renzo Negrini</a></p>
-          </div>
+        <!-- 2 -->
+        <div class="swiper-slide testimonial-box">
+          <p class="testimonial-text">
+            <i class="fas fa-quote-left"></i>
+            I recommend Nicholas Brand without hesitation for any academic, research, or professional opportunity. He will bring integrity, curiosity, and a team-oriented mindset to any environment. If you need any more insight into his work or character, please do not hesitate to contact me. 
+            <i class="fas fa-quote-right"></i>
+          </p>
+          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/renzo-negrini/" target="_blank">Renzo Negrini</a></p>
         </div>
 
-        <!-- Testimonial Slide 3 -->
-        <div class="swiper-slide">
-          <div class="testimonial-content">
-            <p class="testimonial-text">
-              <i class="fas fa-quote-left quote-icon-left"></i>
-              "He demonstrated his excellence to work efficiently and independently and also to lead other workers.
-              He accommodated the varying schedule that is common in agricultural experiments. Overall, he is the most reliable student I have worked with during my Ph.D. program."
-              <i class="fas fa-quote-right quote-icon-right"></i>
-            </p>
-            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/seiya-wakahara-85471614b/" target="_blank">Seiya Wakahara</a></p>
-          </div>
+        <!-- 3 -->
+        <div class="swiper-slide testimonial-box">
+          <p class="testimonial-text">
+            <i class="fas fa-quote-left"></i>
+            He demonstrated his excellence to work efficiently and independently and also to lead other workers. He accommodated the varying schedule that is common in agricultural experiments. Overall, he is the most reliable student I have worked with during my Ph.D. program.
+            <i class="fas fa-quote-right"></i>
+          </p>
+          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/seiya-wakahara-85471614b/" target="_blank">Seiya Wakahara</a></p>
         </div>
 
-        <!-- Testimonial Slide 4 -->
-        <div class="swiper-slide">
-          <div class="testimonial-content">
-            <p class="testimonial-text">
-              <i class="fas fa-quote-left quote-icon-left"></i>
-              "What makes Nicholas stand out is his combination of technical ability and collaborative spirit. He approaches every project with curiosity and persistence."
-              <i class="fas fa-quote-right quote-icon-right"></i>
-            </p>
-            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/jackielimn/" target="_blank">Jackie Li</a></p>
-          </div>
+        <!-- 4 -->
+        <div class="swiper-slide testimonial-box">
+          <p class="testimonial-text">
+            <i class="fas fa-quote-left"></i>
+            What makes Nicholas stand out is his combination of technical ability and collaborative spirit. He approaches every project with curiosity and persistence.
+            <i class="fas fa-quote-right"></i>
+          </p>
+          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/jackielimn/" target="_blank">Jackie Li</a></p>
         </div>
 
-        <!-- Testimonial Slide 5 -->
-        <div class="swiper-slide">
-          <div class="testimonial-content">
-            <p class="testimonial-text">
-              <i class="fas fa-quote-left quote-icon-left"></i>
-              "I give Nicholas my highest recommendation without reservation. Any research team would benefit from his skills, work ethic, and collaborative spirit."
-              <i class="fas fa-quote-right quote-icon-right"></i>
-            </p>
-            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/junjun-lu-93333b317/" target="_blank">Junjun Lu</a></p>
-          </div>
+        <!-- 5 -->
+        <div class="swiper-slide testimonial-box">
+          <p class="testimonial-text">
+            <i class="fas fa-quote-left"></i>
+            I give Nicholas my highest recommendation without reservation. Any research team would benefit from his skills, work ethic, and collaborative spirit.
+            <i class="fas fa-quote-right"></i>
+          </p>
+          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/junjun-lu-93333b317/" target="_blank">Junjun Lu</a></p>
         </div>
 
-        <!-- Testimonial Slide 6 -->
-        <div class="swiper-slide">
-          <div class="testimonial-content">
-            <p class="testimonial-text">
-              <i class="fas fa-quote-left quote-icon-left"></i>
-              "Working with Nicholas was an absolute game changer for me and my business!"
-              <i class="fas fa-quote-right quote-icon-right"></i>
-            </p>
-            <p class="testimonial-author">- <a href="https://glowinggrimecleaning.com/" target="_blank">Danielle Pilarski</a></p>
-          </div>
+        <!-- 6 -->
+        <div class="swiper-slide testimonial-box">
+          <p class="testimonial-text">
+            <i class="fas fa-quote-left"></i>
+            Working with Nicholas was an absolute game changer for me and my business!
+            <i class="fas fa-quote-right"></i>
+          </p>
+          <p class="testimonial-author">- <a href="https://glowinggrimecleaning.com/" target="_blank">Danielle Pilarski</a></p>
         </div>
 
-
-        <!-- Testimonial Slide 7 -->
-        <div class="swiper-slide">
-          <div class="testimonial-content">
-            <p class="testimonial-text">
-              <i class="fas fa-quote-left quote-icon-left"></i>
-              "One of the most striking aspects of Nicholas' growth has been in his development as a leader. Initially a quiet and hardworking athlete, he has grown into a confident and supportive man, someone who lifts others up and fosters a culture of camaraderie and accountability."
-              <i class="fas fa-quote-right quote-icon-right"></i>
-            </p>
-            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/chris-mayer-3808401b4/" target="_blank">Chris Mayer</a></p>
-          </div>
+        <!-- 7 -->
+        <div class="swiper-slide testimonial-box">
+          <p class="testimonial-text">
+            <i class="fas fa-quote-left"></i>
+            One of the most striking aspects of Nicholas' growth has been in his development as a leader. Initially a quiet and hardworking athlete, he has grown into a confident and supportive man, someone who lifts others up and fosters a culture of camaraderie and accountability.
+            <i class="fas fa-quote-right"></i>
+          </p>
+          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/chris-mayer-3808401b4/" target="_blank">Chris Mayer</a></p>
         </div>
-      </div>
-
-      <!-- Swiper Pagination -->
-      <div class="swiper-pagination"></div>
-
-      <!-- Swiper Navigation Arrows -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-
-      <div class="play-pause" id="play-pause">
-        <i class="fas fa-pause"></i> <!-- Default to pause icon -->
-      </div>
+      </div> <!-- End .swiper-wrapper -->
+    </div>
+    <div class="testimonial-controls">
+      <div class="swiper-button-prev"><i class="fas fa-chevron-left"></i></div>
+      <button id="toggleAutoplay" title="Pause/Play">
+        <i class="fas fa-pause"></i>
+      </button>
+      <div class="swiper-button-next"><i class="fas fa-chevron-right"></i></div>
     </div>
   </section>
 
   <!-- Resume Section -->
   <section id="resume" class="section" data-aos="fade-up">
     <h2>Resume</h2>
-    <p>
-      <a href="Nicholas_Brand_2025_ Resume.pdf" download style="color: #ffd700; text-decoration: none; font-size: 24px;">
+    <p class="resume-download">
+     <a href="Nicholas_Brand_2025_ Resume.pdf" download>
         <i class="fas fa-download"></i> Download Resume
       </a>
     </p>
@@ -1283,68 +1206,50 @@
       replacementToggle.classList.toggle('visible'); // Show/hide replacement button
     });
 
+  </script>
     // Testimonials Slideshow
-    // Initialize Swiper
-    const swiper = new Swiper('.testimonials-carousel', {
-      loop: true, // Enable looping
-      slidesPerView: 5, // Number of slides per view
-      spaceBetween: 20, // Space between slides
-      pagination: {
-        el: '.swiper-pagination', // Pagination element
-        clickable: true, // Allow clicking on pagination bullets
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper('.testimonial-carousel', {
+      slidesPerView: 3,
+      spaceBetween: 40,
+      loop: true,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
       },
       navigation: {
-        nextEl: '.swiper-button-next', // Next button
-        prevEl: '.swiper-button-prev', // Previous button
-      },
-      autoplay: {
-        delay: 5000, // Autoplay delay in milliseconds
-        disableOnInteraction: false, // Continue autoplay after user interaction
-      },
-    });
-
-    const playPauseButton = document.getElementById('play-pause');
-    const playPauseIcon = playPauseButton.querySelector('i');
-
-    playPauseButton.addEventListener('click', () => {
-      if (swiper.autoplay.running) {
-        swiper.autoplay.stop();
-        playPauseIcon.classList.remove('fa-pause');
-        playPauseIcon.classList.add('fa-play');
-      } else {
-        swiper.autoplay.start();
-        playPauseIcon.classList.remove('fa-play');
-        playPauseIcon.classList.add('fa-pause');
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+      breakpoints: {
+        1024: { slidesPerView: 3 },
+        768: { slidesPerView: 2 },
+        320: { slidesPerView: 1 }
       }
     });
 
+    const toggleButton = document.getElementById('toggleAutoplay');
+      let isPlaying = true;
 
-    // ===== Mobile-Specific Toggle Logic =====
-    // ===== Integrated Toggle Logic =====
-    function handleNavbarToggle() {
-      if (window.innerWidth <= 768) {
-        navbar.classList.toggle('expanded'); // Mobile toggle
-      } else {
-        // Desktop toggle logic
-        navbar.classList.toggle('hidden');
-        mainContent.classList.toggle('navbar-hidden');
-        replacementToggle.classList.toggle('visible');
-      }
-    }
-
-    // Navbar Toggle - Integrated Version
-    navbarToggle.addEventListener('click', handleNavbarToggle);
-    replacementToggle.addEventListener('click', handleNavbarToggle);
-
-    // Close mobile menu when clicking links
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-         navbar.classList.remove('expanded');
+      toggleButton.addEventListener('click', () => {
+        if (isPlaying) {
+          swiper.autoplay.stop();
+          toggleButton.innerHTML = '<i class="fas fa-play"></i>';
+        } else {
+          swiper.autoplay.start();
+          toggleButton.innerHTML = '<i class="fas fa-pause"></i>';
         }
+        isPlaying = !isPlaying;
       });
-    });
+  </script>
+  <script>
 
+   
   </script>
 </body>
 </html>
