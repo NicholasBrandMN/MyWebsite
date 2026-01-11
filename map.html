@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nicholas Brand | Travel Map</title>
+  <link rel="icon" type="image/png" href="Brand.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+
+  <link rel="stylesheet" href="map.css">
+</head>
+<body>
+  
+  <div class="navbar-toggle" id="navbar-toggle">
+    <i class="fas fa-arrow-left"></i>
+  </div>
+
+  <div class="replacement-toggle" id="replacement-toggle">
+    <i class="fas fa-arrow-right"></i>
+  </div>
+
+  <nav class="navbar" id="navbar">
+    <div class="profile-picture-container">
+      <img src="Nicholas_Brand_Headshot1_02_09_2025.jpg" alt="Profile Picture" class="profile-picture">
+    </div>
+    <div class="profile-name">Nicholas Brand</div>
+    <div class="social-buttons">
+      <a href="https://precisionag.umn.edu/about-center/people/student-workers" target="_blank"><i class="fas fa-university"></i></a>
+      <a href="https://www.linkedin.com/in/nicholasbrandmn/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/NicholasBrandMN" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://t.me/NicholasBrand" target="_blank"><i class="fab fa-telegram"></i></a>
+      <a href="mailto:nicholasbrandmn@outlook.com"><i class="fas fa-envelope"></i></a>
+      <a href="photos.html"><i class="fas fa-images"></i></a>
+    </div>
+    
+    <div class="nav-links">
+      <a href="index.html#hero"><i class="fas fa-home"></i> Home</a>
+      <a href="#" class="active"><i class="fas fa-map-marked-alt"></i> Travel Map</a>
+    </div>
+  </nav>
+
+  <div class="vacations-toggle" id="vacations-toggle">
+    <i class="fas fa-suitcase-rolling"></i>
+  </div>
+
+  <div class="discoveries-panel" id="discoveries-panel">
+    
+    <div class="discoveries-toggle-close" id="discoveries-toggle-close">
+        <i class="fas fa-arrow-right"></i>
+    </div>
+
+    <div class="panel-header">
+      <h3><i class="fas fa-map-marked-alt"></i> My Vacations</h3>
+    </div>
+    
+    <div class="vacations-list" id="vacations-list">
+      <div class="vacation-item" data-year="all">
+        <div class="vacation-icon" style="background-color: #3498db;">
+          <i class="fas fa-globe-americas"></i>
+        </div>
+        <div class="vacation-info">
+          <h4>All Vacations</h4>
+          <p>View all travel destinations</p>
+        </div>
+        <span class="vacation-count">4</span>
+      </div>
+      
+      <div class="vacation-item" data-year="2015" data-locations="eastcoast">
+        <div class="vacation-icon" style="background-color: #e74c3c;">
+          <i class="fas fa-car"></i>
+        </div>
+        <div class="vacation-info">
+          <h4>East Coast Road Trip 2015</h4>
+          <p>East Coast road trip adventure</p>
+        </div>
+        <span class="vacation-count">5</span>
+      </div>
+      
+      <div class="vacation-item" data-year="2016" data-locations="japan">
+        <div class="vacation-icon" style="background-color: #2ecc71;">
+          <i class="fas fa-torii-gate"></i>
+        </div>
+        <div class="vacation-info">
+          <h4>Japan 2016</h4>
+          <p>International trip to Japan</p>
+        </div>
+        <span class="vacation-count">4</span>
+      </div>
+      
+      <div class="vacation-item" data-year="2023" data-locations="bahamas">
+        <div class="vacation-icon" style="background-color: #9b59b6;">
+          <i class="fas fa-ship"></i>
+        </div>
+        <div class="vacation-info">
+          <h4>Bahamas Cruise 2023</h4>
+          <p>Caribbean cruise adventure</p>
+        </div>
+        <span class="vacation-count">7</span>
+      </div>
+      
+      <div class="vacation-item" data-year="2025" data-locations="mexico">
+        <div class="vacation-icon" style="background-color: #f1c40f;">
+          <i class="fas fa-umbrella-beach"></i>
+        </div>
+        <div class="vacation-info">
+          <h4>Mexico 2025</h4>
+          <p>Mexican resort vacation</p>
+        </div>
+        <span class="vacation-count">3</span>
+      </div>
+      
+      <div class="vacation-item" data-locations="state-parks">
+        <div class="vacation-icon" style="background-color: #34495e;">
+          <i class="fas fa-tree"></i>
+        </div>
+        <div class="vacation-info">
+          <h4>Minnesota State Parks</h4>
+          <p>Beautiful parks in Minnesota</p>
+        </div>
+        <span class="vacation-count">6</span>
+      </div>
+      
+      <div class="vacation-item" data-locations="national-parks">
+        <div class="vacation-icon" style="background-color: #e67e22;">
+          <i class="fas fa-mountain"></i>
+        </div>
+        <div class="vacation-info">
+          <h4>National Parks</h4>
+          <p>U.S. National Parks (Future Visits)</p>
+        </div>
+        <span class="vacation-count">0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-content" id="main-content">
+    <div id="map-container">
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <div class="dark-mode-toggle" id="dark-mode-toggle">
+    <i class="fas fa-moon" id="toggle-icon"></i>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+  <script src="map.js"></script>
+</body>
+</html>

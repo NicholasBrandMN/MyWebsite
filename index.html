@@ -6,726 +6,20 @@
   <link rel="icon" type="image/png" href="Brand.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Fonts (Poppins) -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-  <!-- AOS (Animate On Scroll) CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-
-  <!-- Swiper CSS & Button (Required for proper layout) -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-
-  <!-- Skeleton CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
   
-  <!-- Inline CSS -->
-  <style>
-    /* General Styles */
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #ffffff;
-      color: #000000;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      transition: background-color 0.5s, color 0.5s;
-    }
-
-    body.dark-mode {
-      background-color: #1a1a1a;
-      color: #ffffff;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    h3 {
-      color: #000000; /* black in light mode */
-      transition: color 0.5s ease;
-    }
-
-    body.dark-mode h3 {
-      color: #ffd700; /* gold in dark mode */
-    }
-
-
-    /* Vertical Navbar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 250px; 
-      background: #050b14; 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 20px;
-      z-index: 1000;
-      transition: transform 0.3s ease;
-    }
-
-    .navbar .profile-picture {
-      width: 120px;
-      height: 150px;
-      border-radius: 50%;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      border: 2px solid #ffd700; /* Gold border */
-      object-fit: cover;
-    }
-
-    .navbar .profile-name {
-      font-size: 22px; /* Larger font size */
-      font-weight: 500;
-      color: #ffffff; /* White text color */
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .navbar .social-buttons {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .navbar .social-buttons a {
-      color: #ffffff; /* White icon color */
-      font-size: 20px; /* Icon size */
-      transition: color 0.3s;
-    }
-
-    .navbar .social-buttons a:hover {
-      color: #53a9e1; /* Light blue icon color on hover */
-    }
-
-    .navbar .nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .navbar .nav-links a {
-      font-size: 16px;
-      font-weight: 500;
-      color: #ffffff; /* White text color */
-      transition: color 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .navbar .nav-links a i {
-      font-size: 20px;
-      color: #ffffff; /* White icon color */
-      transition: color 0.3s;
-    }
-
-    .navbar .nav-links a:hover {
-      color: #ffd700; /* Gold text color on hover */
-    }
-
-    .navbar .nav-links a:hover i {
-      color: #53a9e1; /* Light blue icon color on hover */
-    }
-
-    @media (max-width: 768px) {
-   .navbar {
-      width: 100%;
-      height: auto;
-      position: relative;
-      padding: 10px;
-    }
-   .hero, .section {
-      margin-left: 0;
-    }
- }
-
-    /* ===== Navbar Toggle System ===== */
-    /* Base Toggle Button Styles */
-    .navbar-toggle,
-    .replacement-toggle {
-      position: fixed;
-      width: 45px;
-      height: 45px;
-      background: #050b14;
-      border: 2px solid #ffd700;
-      border-radius: 50%;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 1100;
-      transition: all 0.3s ease;
-      bottom: 20px;
-      left: 20px;
-    }
-
-    .navbar-toggle:hover,
-    .replacement-toggle:hover {
-      color: #53a9e1;
-      border-color: #53a9e1;
-    }
-
-    /* Replacement Toggle (Initially Hidden) */
-    .replacement-toggle {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .replacement-toggle.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .navbar.hidden {
-      transform: translateX(-470px); /* Hide navbar */
-    }
-
-    .main-content.navbar-hidden {
-      margin-left: -230px; 
-      margin-right: -15px;
-    }
-
-    /* ===== Accessibility Improvements ===== */
-    .navbar-toggle:focus,
-    .replacement-toggle:focus {
-      outline: 2px solid #53a9e1;
-      outline-offset: 2px;
-    }
-
-    /* ===== Animation Smoothing ===== */
-    .navbar {
-      transition: 
-        transform 0.3s ease-out,
-        height 0.3s ease;
-    }
-
-    /* Main Content */
-    .main-content {
-      margin-left: 20px;
-      margin-right: -15px;
-      transition: margin-left 0.3s ease; /* Smooth transition */
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: url('your-image.jpg') no-repeat center center/cover;
-      margin-left: 270px; /* Adjust for wider navbar */
-    }
-
-    .hero h1 {
-      font-size: 72px;
-      font-weight: 700;
-      color: #ffd700; /* Gold color */
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 24px;
-      font-weight: 400;
-    }
-
-    /* Sections */
-    .section {
-      min-height: 100vh;
-      padding: 0 10%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      margin-left: 270px; /* Adjust for wider navbar */
-      opacity: 0;        /* For AOS fade-up */
-      transform: translateY(50px);
-    }
-
-    .section.aos-animate {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section h2 {
-      font-size: 48px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .section p {
-      font-size: 18px;
-      font-weight: 400;
-      max-width: 800px;
-      line-height: 1.6;
-    }
-
-    /* Projects Section */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 50px 250px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .project {
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .project-title {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .project-title a {
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .project-title a:hover {
-      color: #ffd700; /* Gold hover */
-    }
-
-    .project-preview {
-      width: 150%;
-      height: 300px;
-      border: 2px solid #ffd700; /* Gold border */
-      gap: 10px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .project-preview iframe {
-      width: 100%;
-      height: 100%;
-      gap: 10px;
-      border: none;
-    }
-
-    /* Website Preview Card */
-    .website-preview {
-      position: relative;
-      width: 100%;
-      height: 300px;
-      border: 2px solid #ffd700; /* Gold border */
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .website-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Ensure the image covers the container */
-    }
-
-    .website-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .website-preview:hover .website-overlay {
-      opacity: 1; /* Show overlay on hover */
-    }
-
-    .visit-button {
-      background-color: #ffd700; /* Gold background */
-      color: #050b14; /* Dark text color */
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 500;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .visit-button:hover {
-      background-color: #53a9e1; /* Light blue on hover */
-      color: #ffffff; /* White text on hover */
-    }
-
-    .visit-button i {
-      margin-left: 5px;
-    }
-
-    .project-description {
-      font-size: 16px;
-      color: #ffffff; /* White text */
-      text-align: center;
-      margin-top: 10px;
-    }
-
-
-    /* About Section */
-    #about {
-      text-align: left;
-    }
-
-    /* Skills Section */
-    #skills {
-      text-align: center; 
-      margin-left: 0px; 
-      padding: 0; 
-    }
-    
-    .skills-grid {
-      display: block;
-      text-align: left;
-    }
-
-    .skills-column {
-      margin-bottom: 20px;
-    }
-
-    .skills-column h3 {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: #ffd700; 
-    }
-
-    .skills-column ul {
-      list-style-type: none;
-      padding-left: 0;
-      margin: 0;
-    }
-
-    .skills-column ul li {
-      font-size: 16px;
-      font-weight: 400;
-      margin-bottom: 5px;
-      display: inline;
-    }
-
-    /* Testimonials Section */
-    #testimonials h2 {
-      color: white !important;
-    }
-
-    .testimonial-carousel {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 40px;
-      padding-bottom: 60px;
-    }
-
-    .testimonial-box {
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    .testimonial-box p {
-      font-size: 16px;
-      font-style: italic;
-      margin-bottom: 10px;
-      color: #ffd700;
-    }
-
-    .testimonial-box h4 {
-      font-size: 14px;
-      color: #ffd700;
-      margin: 0;
-    }
-
-    .testimonial-author a {
-      text-decoration: none;
-      color: #ffd700;
-      transition: color 0.3s ease;
-    }
-
-    .testimonial-author a:hover {
-      color: #53a9e1;
-      text-decoration: underline;
-    }
-
-
-    /* Flex container for controls */
-    .testimonial-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 4px;
-      margin-top: 20px;
-      position: relative;
-    }
-
-    #testimonials::before {
-      content: '';
-      position: fixed; 
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: url('DALLE Generated GIS Themes Background.png') no-repeat center center/cover;
-      z-index: -1;
-    }
-
-    /* Arrows */
-    .swiper-button-prev,
-    .swiper-button-next {
-      position: static; /* override Swiper’s absolute */
-      color: #ffd700;
-      font-size: 18px;
-      width: 32px;
-      height: 10px;
-      cursor: pointer;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-      background: none !important;
-      border: none !important;
-      box-shadow: none !important;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-top: 10px 
-    }
-    .swiper-button-prev::after,
-    .swiper-button-next::after {
-      display: none;
-    }
-    .swiper-button-prev:hover,
-    .swiper-button-next:hover {
-      color: #53a9e1;
-    }
-
-    /* Play/Pause button */
-    #toggleAutoplay {
-      background: none;
-      border: none;
-      color: #ffd700;
-      font-size: 22px;
-      cursor: pointer;
-      transition: color 0.3s ease, text-shadow 0.3s ease
-    }
-
-    #toggleAutoplay:hover {
-      color: #53a9e1;
-    }
-
-    .resume-download {
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .resume-download a {
-      color: #ffd700;
-      text-decoration: none;
-      font-size: 24px;
-      transition: color 0.3s ease;
-    }
-
-    .resume-download a:hover {
-      color: #53a9e1;
-    }
-
-    /* Footer */
-    .footer {
-      padding: 40px 20px;
-      text-align: center;
-      background: #050b14; /* Match navbar background color */
-      color: #ffffff;
-      width: 100%; /* Full width */
-      margin-left: 0; /* Remove left margin */
-    }
-
-    body.dark-mode .footer {
-      background: #050b14; /* Keep the same color in dark mode */
-    }
-
-    .footer a {
-      color: #ffffff; /* Gold by default */
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .footer a:hover {
-      color: #ffd700; /* Light blue on hover */
-    }
-
-    /* Dark Mode Toggle */
-    .dark-mode-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      background-color: #050b14; /* Navbar background color */
-      border: 3px solid #ffd700; /* Thicker gold border */
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background-color 0.3s, border-color 0.3s;
-      z-index: 1000;
-    }
-
-    .dark-mode-toggle i {
-      font-size: 24px;
-      color: #ffd700; /* Gold color for the icons */
-      transition: color 0.5s;
-    }
-
-    .dark-mode-toggle:hover i {
-      color: #53a9e1; /
-    }
-
-    /* Scroll-to-Top Button */
-    .scroll-to-top {
-      position: fixed;
-      bottom: 80px; /* Position above the dark mode toggle */
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      background-color: #050b14; /* Navbar background color */
-      border: 3px solid #ffd700; /* Thicker gold border */
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: opacity 0.3s, visibility 0.3s, background-color 0.3s, border-color 0.3s;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .scroll-to-top.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .scroll-to-top i {
-      font-size: 24px;
-      color: #ffd700; 
-      transition: color 0.3s;
-    }
-
-    .scroll-to-top:hover i {
-      color: #53a9e1; 
-      border-color: #53a9e1; 
-    }
-
-
-    /* Animations (AOS) */
-    [data-aos] {
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    /* ===== Mobile Overrides Only ===== */
-    @media (max-width: 768px) {
-     /* Navbar -> Mobile Header */
-     .navbar {
-       position: fixed;
-       width: 100%;
-       height: 60px;
-       padding: 10px;
-       flex-direction: row;
-       justify-content: space-between;
-       align-items: center;
-       overflow: hidden;
-       transition: height 0.3s ease;
-      }
-  
-      .navbar.expanded {
-        height: 100vh;
-        flex-direction: column;
-      }
-  
-      .profile-picture {
-        width: 40px !important;
-        height: 40px !important;
-        margin: 0 !important;
-      }
-  
-     .profile-name,
-     .nav-links {
-       display: none !important;
-      }
-  
-      .navbar.expanded .nav-links {
-        display: flex !important;
-        margin-top: 20px;
-      }
-  
-     .navbar-toggle {
-       position: static;
-       transform: none;
-       margin-left: auto;
-      }
-
-     /* Content Spacing */
-     .main-content, 
-     .hero, 
-     .section {
-       margin-left: 0;
-       padding-top: 80px;
-      }
-  
-      /* Typography */
-      .hero h1 { font-size: 36px; }
-      .hero p { font-size: 18px; }
-      .section h2 { font-size: 32px; }
-  
-      /* Projects Grid */
-      .projects-grid {
-       grid-template-columns: 1fr;
-       gap: 30px;
-      }
-  
-     .project-preview {
-       width: 100%;
-       height: 200px;
-      }
-  
-      /* Testimonials */
-       #testimonials { 
-       margin-left: 0;
-       padding: 20px;
-      }
-  
-      /* Touch Targets */
-      a, button, .nav-links a {
-        min-width: 48px;
-        min-height: 48px;
-      }
-    }
-
-  </style>
+  <link rel="stylesheet" href="Index.CSS">
 </head>
 <body>
-  <!-- Vertical Navbar -->
-    <!-- Navbar Toggle Button -->
+  
   <div class="navbar-toggle" id="navbar-toggle">
     <i class="fas fa-arrow-left"></i>
   </div>
+
   <nav class="navbar" id="navbar">
     <img src="Nicholas_Brand_Headshot1_02_09_2025.jpg" alt="Profile Picture" class="profile-picture">
     <div class="profile-name">Nicholas Brand</div>
@@ -736,7 +30,6 @@
       <a href="https://t.me/NicholasBrand" target="_blank"><i class="fab fa-telegram"></i></a>
       <a href="mailto:nicholasbrandmn@outlook.com"><i class="fas fa-envelope"></i></a>
       <a href="photos.html" ><i class="fas fa-images"></i></a>
-
     </div>
     <div class="nav-links">
       <a href="#hero"><i class="fas fa-home"></i> Home</a>
@@ -747,517 +40,332 @@
     </div>
   </nav>
 
-  <!-- Replacement Toggle Button -->
   <div class="replacement-toggle" id="replacement-toggle">
-    <i class="fas fa-arrow-right"></i> <!-- Arrow pointing right -->
+    <i class="fas fa-arrow-right"></i> 
   </div>
 
-  <!-- Main Content -->
   <div class="main-content" id="main-content">
     
-
-  <!-- Hero Section -->
-  <div class="hero" id="hero">
-    <div>
-      <h1>Nicholas Brand</h1>
-      <p><span class="typed" data-typed-items="Researcher, Geospatial Analyst, Field Coordinator, Web Developer, Lab Technician"></span></p>
+    <div class="hero" id="hero">
+      <div>
+        <h1>Nicholas Brand</h1>
+        <p><span class="typed" data-typed-items="GIS Developer, Associate GIS Analyst, Researcher, Web Developer, Field Coordinator"></span></p>
+      </div>
     </div>
-  </div>
 
-  <!-- About Section -->
-  <section id="about" class="section" data-aos="fade-up">
-    <h2>About Me</h2>
-    <ul>My name is Nicholas Brand. I was born and raised in Winona, Minnesota, and currently reside in St. Paul. I am a GIS Analyst with a strong background in geospatial analysis, topographic modeling, and web development. I graduated from Arizona State University with a Bachelor of Science in Geographic Information Systems, where I developed expertise in spatial data analytics, programming, and field research. My work focuses on applying GIS to solve real-world problems in areas such as precision agriculture, environmental monitoring, and natural hazard analysis.</ul>
+    <section id="about" class="section" data-aos="fade-up">
+      <h2>About Me</h2>
+      <div class="about-text">
+        <p>My name is Nicholas Brand. I was born and raised in Winona, Minnesota, and currently reside in Sartell, MN. I am a GIS Developer with a strong background in geospatial analysis, topographic modeling, and web development. I graduated from Arizona State University with a Bachelor of Science in Geographic Information Systems, where I developed expertise in spatial data analytics, programming, and field research. My work focuses on applying GIS to solve real-world problems in areas such as precision agriculture, environmental monitoring, and natural hazard analysis.</p>
+        <p>I am passionate about leveraging geospatial technologies to create impactful solutions. My skills include programming in Java, C++, Python, JavaScript, HTML/CSS, SQL, C, R, and Bash as well as proficiency in tools like ArcGIS, QGIS, and remote sensing platforms. I enjoy working on projects that combine data analysis, visualization, and fieldwork to address complex environmental and agricultural challenges.</p>
+        <p>I am currently seeking a role as a <strong>GIS Developer</strong>, <strong>Senior GIS Analyst</strong>, or <strong>Web Developer</strong> where I can apply my technical skills and research experience to contribute to innovative projects. I thrive in collaborative environments that encourage professional growth and provide opportunities to expand my expertise in GIS applications.</p>
+      </div>
 
-    <ul>I am passionate about leveraging geospatial technologies to create impactful solutions. My skills include programming in Java, C++, Python, JavaScript, HTML/CSS, SQL, C, R, and Bash as well as proficiency in tools like ArcGIS, QGIS, and remote sensing platforms. I enjoy working on projects that combine data analysis, visualization, and fieldwork to address complex environmental and agricultural challenges.</ul>
-
-    <ul>I am currently seeking a role as a <strong>GIS Technician</strong>, <strong>Geospatial Analyst</strong>, or <strong>Web Developer</strong> where I can apply my technical skills and research experience to contribute to innovative projects. I thrive in collaborative environments that encourage professional growth and provide opportunities to expand my expertise in GIS applications.</ul>
-
-    <!-- Work Experience -->
-   <h2 style="padding-top: 150px">Relevant Work Experience</h2>
-    <ul>
-      <p>
-        <h3>UMN, Precision Agriculture - Researcher / Field Coordinator</h3> (May 2024 - Present)
+      <h2 style="padding-top: 150px">Relevant Work Experience</h2>
+      <div class="experience">
+        <h3>Telcom Constuction - GIS Developer</h3> 
+        <p>(August 2025 - Present)</p>
         <ul>
-          <li>Applied geospatial analysis using LiDAR, drone imagery, satellite imagery, and weather data in ArcGIS and QGIS to build and maintain a geospatial database.</li>
-          <li>Developed Python and R scripts to automate processing of large geospatial and agricultural datasets, improving efficiency in GIS Operations, data collection, and technical documentation.</li>
-          <li>Led cross functional teams in designing and maintaining a Precision Agriculture Research Network Website.</li>
-          <li>Conducted fieldwork and GPS guided data collection (water, soil, crop, and instrument sampling), ensuring accurate digitizing, plotting, and spatial integration directly supporting field to database workflows.</li>
-          <li>Engaged stakeholders (farmers, researchers, and the public) to coordinate sampling, interpret data, deliver actionable insights and products.</li>
+          <li>Built “Map Engine”—a custom web application that uses REST API to pull user-specific AGOL content into a tailored interface with interactive viewers, editing tools, bookmarking, printing, and integrated NOAA radar data.</li>
+          <li>Developed ArcGIS Pro packages with Python scripts to automate construction printing, billing, and quality control workflows—including auto-filtering queries, applying localized coordinate systems, and generating standardized maps using a custom nationwide grid system.</li>
+          <li>Engineered a QC automation tool that updates queries, validates data fields, traces snapped points, auto-populates specified fields, and delivers detailed error reports with designer accuracy metrics.</li>
+          <li>Designed and deployed FME projects for automated data integration, scheduled to run multiple times daily on company servers.</li>
         </ul>
-      </p>
-      <p>
-        <h3>City of Winona, Park & Rec - Assistant Manager</h3> (April 2023 - May 2024)
-        <ul>
-          <li>Opening, daily operations, and closing.</li>
-          <li>Training staff in key phrases for rule enforcement and ways to continue to enforce safety.</li>
-          <li>Wrote, taught, and created our current EAPs.</li>
-          <li>Dealt with all Behavioral, Rescues, and Emergency Medical Situations that occured on site.</li>
-          <li>Staff coordination for scheduling, programming, and private rentals.</li>
-        </ul>
-      </p>
-      <p>
-        <h3>UMN, Precision Agriculture - Internship</h3> (May 2022 - July 2023)
-        <ul>
-          <li>Measuring boundary lines using survey equipment to update field maps.</li>
-          <li>Ran analysis and organized source data from Landsat, MNTopo, and drone imagery.</li>
-          <li>Supervised and led field work on Soil, water, crop, and air pollution samples from various pieces of equipment.</li>
-          <li>Conducted geochemical spectroscopy analysis with pXRF & XRF spectrometers.</li>
-        </ul>
-      </p>
-      <p>
-        <h3>City of Winona, Park & Rec - Aquatic Assistant Manager / Site Manager</h3> (May 2017 - August 2021)
-        <ul>
-          <li>Staff coordination for scheduling, lessons, and concessions.</li>
-          <li>Opening, daily operations, and closing.</li>
-          <li>Training lifeguard and WSI staff in key phrases for rule enforcement and ways to continue to enforce safety.</li>
-          <li>Dealt with all Behavioral, Rescues, and Emergency Medical Situations that occured while I was on site.</li>
-          <li>Strategic planning and implementation of reopening with covid 19 protocols.</li>
-        </ul>
-      </p>
-    </ul>
 
-    <!-- Education -->
-    <h2 style="padding-top: 150px">Education</h2>
-    <ul>
-      <p>
-        <h3>Arizona State University - Geographic Information Science (BS)</h3> (August 2023 - May 2025)
+        <h3>UMN, Precision Agriculture - Researcher / Field Coordinator</h3> 
+        <p>(May 2024 - December 2026)</p>
+        <ul>
+          <li>Communicated directly with stakeholders to coordinate on-site field teams, (for soil, water, and crop sampling using various tools: Lysimeters, Dualex, Fieldscan Crop Circle Phenom) handle perscriptions with farmers, and share research with the public.</li>
+          <li>Built Python and R scripts to process and analyze large datasets for field and lab efficiency.</li>
+          <li>Led team in developing Precision Agriculture On-Farm Research Network Website and maintaining the Precision Agriculture Center Website.</li>
+          <li>Performed advanced geospatial analysis using LiDAR data, drone imagery, and weather data to create a robust geospatial database in QGIS, SMS Basic, ArcGIS, and Yield Editor.</li>
+        </ul>
+
+        <h3>City of Winona, Park & Rec - Assistant Manager</h3> 
+        <p>(April 2023 - May 2024)</p>
+        <ul>
+          <li>Used geographic data to create new digital maps for updated Trail & Street maintenance.</li>
+          <li>Aided trail construction by creating new maps, analyzing soil integrity, and assessing erosion likelihood.</li>
+          <li>Managed 3 public facilities and assisted with Adult Sports and Special Events throughout Winona.</li>
+        </ul>
+
+        <h3>UMN, Precision Agriculture - Internship</h3> 
+        <p>(May 2022 - July 2023)</p>
+        <ul>
+          <li>Measured boundary lines using survey equipment to update maps.</li>
+          <li>Used and organized source data from Landsat & Drone imagery.</li>
+          <li>Collected soil, water, plant, and air samples from lysimeters, fields, streams, and collection areas.</li>
+          <li>Performed geochemical analysis with pXRF & XRF spectrometers of thousands of samples.</li>
+        </ul>
+
+        <h3>City of Winona, Park & Rec - Aquatic Assistant Manager / Site Manager</h3> 
+        <p>(May 2017 - August 2021)</p>
+        <ul>
+          <li>Measured boundary lines using survey equipment to update maps.</li>
+          <li>Used and organized source data from Landsat & Drone imagery.</li>
+          <li>Collected soil, water, plant, and air samples from lysimeters, fields, streams, and collection areas.</li>
+          <li>Performed geochemical analysis with pXRF & XRF spectrometers of thousands of samples.</li>
+        </ul>
+      </div>
+
+      <h2 style="padding-top: 150px">Education</h2>
+      <div class="education">
+        <h3>Arizona State University - Geographic Information Science (BS)</h3> 
+        <p>(August 2023 - May 2025)</p>
         <ul>
           <li>Relevant Courses: Fundamentals of Coding, Geographic Info Science 1-3, Stats for Geography & Planning, Adv Stats Geography & Planning, Cartography & Georepresentation, Geodesign and Urban Planning, Env Mgmt Systems & Strategy, Remote Sensing & Geo Analysis of Natural Resources & Environment, Basic Soil Science.</li>
         </ul>
-      </p>
-    </ul>
+      </div>
 
-    <!-- Skills Section -->
-    <h2 style="padding-top: 150px">Skills</h2>
-    <ul>
-      <p>
-        <h3>Programming Languages:</h3> 
-         <ul>
-          <li>Java, C++, Python, HTML/CSS, SQL, C, R, Bash</li>
-         </ul>
-      </p>
-      <p>
-        <h3>Tools and Platforms:</h3> 
-         <ul>
-          <li>GitHub, Windows, Esri Suite (ArcGIS, Collector, etc.), Visual Studio, RStudio, Web Soil Survey, Citrix, GoDaddy, Squarespace, Drupal, MNTopo, SMS Basic, Yield Editor, QGIS, PlanetGIS, USGS Landsat, MNTopo</li>
-         </ul>
-      </p>
-    </ul>
+      <h2 style="padding-top: 150px">Skills</h2>
+      <div class="skills-container">
+        <div class="skills-category">
+          <h3>Programming Languages:</h3> 
+          <ul>
+            <li>ArcPy, Java, C++, Python, JavaScript, HTML/CSS, SQL, C, R, Bash</li>
+          </ul>
+        </div>
+        <div class="skills-category">
+          <h3>Tools and Platforms:</h3> 
+          <ul>
+            <li>GitHub, Windows, Esri Suite (ArcGIS, Collector, etc.), Visual Studio, RStudio, Web Soil Survey, Citrix, GoDaddy, Squarespace, Drupal, MNTopo, SMS Basic, Yield Editor, QGIS, PlanetGIS, USGS Landsat, MNTopo</li>
+          </ul>
+        </div>
+      </div>
 
-    <!-- Certificates Section -->
-    <div id="certificates">
-      <h2 style="padding-top: 150px">Certificates and Achievements</h2>
-      <p>My certifications and achievements.</p>
-
-      <div class="project">
-        <h3 class="project-title">
-          <a href="https://www.michaelsutter.com/ediploma?fn=diplomastatuscheck&key=02000000eae6251f76ac19b3e94b00dcb61672fe320e8b7b8525a4dfa1d687c0ead08ec8bb221b0457e607596da8fdc747271b4fd44b606e6861cb1b01ddc30d8da89373" target="_blank">
-            Bachelor's of Science Degree
-          </a>
-        </h3>
-        <div class="project-preview">
-          <div class="website-preview">
-            <img src="Nicholas_Brand_Bachelor'sOfScienceDegree.jpg" alt="Effect of Slope & Climate on Yield">
-            <div class="website-overlay">
-              <a href="https://www.michaelsutter.com/ediploma?fn=diplomastatuscheck&key=02000000eae6251f76ac19b3e94b00dcb61672fe320e8b7b8525a4dfa1d687c0ead08ec8bb221b0457e607596da8fdc747271b4fd44b606e6861cb1b01ddc30d8da89373" target="_blank" class="visit-button">
-                Visit Website <i class="fas fa-external-link-alt"></i>
-              </a>
+      <div id="certificates">
+        <h2 style="padding-top: 150px">Certificates and Achievements</h2>
+        <p>My certifications and achievements.</p>
+        <div class="project">
+          <h3 class="project-title">
+            <a href="https://www.michaelsutter.com/ediploma?fn=diplomastatuscheck&key=02000000eae6251f76ac19b3e94b00dcb61672fe320e8b7b8525a4dfa1d687c0ead08ec8bb221b0457e607596da8fdc747271b4fd44b606e6861cb1b01ddc30d8da89373" target="_blank">
+              Bachelor's of Science Degree
+            </a>
+          </h3>
+          <div class="project-preview">
+            <div class="website-preview">
+              <img src="Nicholas_Brand_Bachelor'sOfScienceDegree.jpg" alt="Bachelor's Degree">
+              <div class="website-overlay">
+                <a href="https://www.michaelsutter.com/ediploma?fn=diplomastatuscheck&key=02000000eae6251f76ac19b3e94b00dcb61672fe320e8b7b8525a4dfa1d687c0ead08ec8bb221b0457e607596da8fdc747271b4fd44b606e6861cb1b01ddc30d8da89373" target="_blank" class="visit-button">
+                  Visit Website <i class="fas fa-external-link-alt"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <section id="projects" class="section" data-aos="fade-up">
+      <h2 style="padding-top: 150px">Projects</h2>
+      <div class="projects-grid">
+        
+        <div class="project">
+          <h3 class="project-title">
+            <a href="map.html">Custom Online Map Viewer</a>
+          </h3>
+          <div class="project-preview">
+            <div class="website-preview">
+              <img src="Preview Project Image Custom Map Viewer.png" alt="Custom Online Map Viewer Preview" style="object-fit: cover;">
+              <div class="website-overlay">
+                <a href="map.html" class="visit-button">
+                  Visit Map <i class="fas fa-map-marked-alt"></i>
+                </a>
+              </div>
+            </div>
+            <p class="project-description">
+              A custom interactive travel map tracking my journeys, built with Leaflet.js. Features dark mode, custom markers, and vacation routing.
+            </p>
+          </div>
+        </div>
 
-  <!-- Projects Section -->
-  <section id="projects" class="section" data-aos="fade-up">
-    <h2 style="padding-top: 150px">Projects</h2>
-    <div class="projects-grid">
+        <div class="project">
+          <h3 class="project-title">
+            <a href="https://www.canva.com/design/DAGllNXj2mg/rVrN8Y7-i2sPTEZ8WpgU6w/view?utm_content=DAGllNXj2mg&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hf385060c9b" target="_blank">
+              Effect of Slope & Climate on Yield
+            </a>
+          </h3>
+          <div class="project-preview">
+            <div class="website-preview">
+              <img src="Nicholas_Brand_CapstoneProject_ASU_2025.png" alt="Effect of Slope & Climate on Yield">
+              <div class="website-overlay">
+                <a href="https://asu.digication.com/nicholas-brand/final-project" target="_blank" class="visit-button">
+                  Visit Website <i class="fas fa-external-link-alt"></i>
+                </a>
+              </div>
+            </div>
+            <p class="project-description">
+               A capstone analysis investigating the relationship between topographical slope, climate variables, and agricultural yield.
+            </p>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3 class="project-title">
+            <a href="https://storymaps.arcgis.com/stories/f5548d826a5c473ea3937c961cf7f769" target="_blank">
+              Geospatial Analysis of Winona's Flooding Patterns
+            </a>
+          </h3>
+          <div class="project-preview">
+            <iframe src="https://storymaps.arcgis.com/stories/f5548d826a5c473ea3937c961cf7f769" title="Geospatial Analysis of Winona's Flooding Patterns"></iframe>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3 class="project-title">
+            <a href="https://precisionag.umn.edu/farm-precision-agriculture-research-network" target="_blank">
+              PAC On-Farm Research Network
+            </a>
+          </h3>
+          <div class="project-preview">
+            <div class="website-preview">
+              <img src="Preview Project Image On Farm Research.png" alt="PAC On-Farm Research Network Preview">
+              <div class="website-overlay">
+                <a href="https://precisionag.umn.edu/farm-precision-agriculture-research-network" target="_blank" class="visit-button">
+                  Visit Website <i class="fas fa-external-link-alt"></i>
+                </a>
+              </div>
+            </div>
+            <p class="project-description">
+              The PAC On-Farm Research Network is a collaborative initiative aimed at advancing precision agriculture practices through on-farm research and data-driven insights.
+            </p>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3 class="project-title">
+            <a href="https://storymaps.arcgis.com/stories/b13cecab5aff4da1b635a9de57c93373" target="_blank">
+              Understanding Winona, Minnesota River Flooding
+            </a>
+          </h3>
+          <div class="project-preview">
+            <iframe src="https://storymaps.arcgis.com/stories/b13cecab5aff4da1b635a9de57c93373" title="Understanding Winona, Minnesota River Flooding"></iframe>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3 class="project-title">
+            <a href="Nicholas_Brand_PNM.jpeg" target="_blank">
+              Precision Nitrogen Managment
+            </a>
+          </h3>
+          <div class="project-preview">
+            <div class="website-preview">
+              <img src="Nicholas_Brand_PNM.jpeg" alt="Precision Nitrogen Managment">
+              <div class="website-overlay">
+                <a href="Nicholas_Brand_PNM.jpeg" target="_blank" class="visit-button">
+                  View Image <i class="fas fa-external-link-alt"></i>
+                </a>
+              </div>
+            </div>
+            <p class="project-description">
+               Research on optimizing nitrogen application strategies to improve crop yield while minimizing environmental impact.
+            </p>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3 class="project-title">
+            <a href="https://storymaps.arcgis.com/stories/57c9f44fd1df4155b980de331d5c0114" target="_blank">
+              Superior National Forest CHM and Classification
+            </a>
+          </h3>
+          <div class="project-preview">
+            <iframe src="https://storymaps.arcgis.com/stories/57c9f44fd1df4155b980de331d5c0114" title="Superior National Forest CHM and Classification"></iframe>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3 class="project-title">
+            <a href="https://storymaps.arcgis.com/stories/d314202d38454971a29d6328d83044bf" target="_blank">
+              Liverpool Race Riots 1919
+            </a>
+          </h3>
+          <div class="project-preview">
+            <iframe src="https://storymaps.arcgis.com/stories/d314202d38454971a29d6328d83044bf" title="Liverpool Race Riots 1919"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section" data-aos="fade-up">
+      <h2 style="padding-top: 150px">Testimonials</h2>
+      <div class="swiper-container testimonial-carousel">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide testimonial-box">
+            <p class="testimonial-text">
+              <i class="fas fa-quote-left"></i>
+              Nicholas played a key role in sample processing and organization, creating labels for sampling, drying and weighing plant samples, and separating corn components for nitrogen analysis. His attention to detail and commitment to accuracy ensured high-quality data collection and analysis.
+              <i class="fas fa-quote-right"></i>
+            </p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/toshi-mizuta/" target="_blank">Katsutoshi Mizuta</a></p>
+          </div>
+          <div class="swiper-slide testimonial-box">
+            <p class="testimonial-text"><i class="fas fa-quote-left"></i> I recommend Nicholas Brand without hesitation... <i class="fas fa-quote-right"></i></p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/renzo-negrini/" target="_blank">Renzo Negrini</a></p>
+          </div>
+          <div class="swiper-slide testimonial-box">
+            <p class="testimonial-text"><i class="fas fa-quote-left"></i> He demonstrated his excellence to work efficiently... <i class="fas fa-quote-right"></i></p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/seiya-wakahara-85471614b/" target="_blank">Seiya Wakahara</a></p>
+          </div>
+          <div class="swiper-slide testimonial-box">
+            <p class="testimonial-text"><i class="fas fa-quote-left"></i> What makes Nicholas stand out is his combination... <i class="fas fa-quote-right"></i></p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/jackielimn/" target="_blank">Jackie Li</a></p>
+          </div>
+          <div class="swiper-slide testimonial-box">
+            <p class="testimonial-text"><i class="fas fa-quote-left"></i> I give Nicholas my highest recommendation... <i class="fas fa-quote-right"></i></p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/junjun-lu-93333b317/" target="_blank">Junjun Lu</a></p>
+          </div>
+          <div class="swiper-slide testimonial-box">
+            <p class="testimonial-text"><i class="fas fa-quote-left"></i> Working with Nicholas was an absolute game changer... <i class="fas fa-quote-right"></i></p>
+            <p class="testimonial-author">- <a href="https://glowinggrimecleaning.com/" target="_blank">Danielle Pilarski</a></p>
+          </div>
+          <div class="swiper-slide testimonial-box">
+            <p class="testimonial-text"><i class="fas fa-quote-left"></i> One of the most striking aspects of Nicholas' growth... <i class="fas fa-quote-right"></i></p>
+            <p class="testimonial-author">- <a href="https://www.linkedin.com/in/chris-mayer-3808401b4/" target="_blank">Chris Mayer</a></p>
+          </div>
+        </div>
+      </div>
       
-      <!-- Project 1 -->
-      <div class="project">
-        <h3 class="project-title">
-          <a href="https://storymaps.arcgis.com/stories/d314202d38454971a29d6328d83044bf" target="_blank">
-            Liverpool Race Riots 1919
-          </a>
-        </h3>
-        <div class="project-preview">
-          <iframe src="https://storymaps.arcgis.com/stories/d314202d38454971a29d6328d83044bf" title="Project 1"></iframe>
-        </div>
+      <div class="testimonial-controls">
+        <div class="custom-swiper-prev"><i class="fas fa-chevron-left"></i></div>
+        <button id="toggleAutoplay" title="Pause/Play">
+          <i class="fas fa-pause"></i>
+        </button>
+        <div class="custom-swiper-next"><i class="fas fa-chevron-right"></i></div>
       </div>
+    </section>
 
-      <!-- Project 2 -->
-      <div class="project">
-        <h3 class="project-title">
-          <a href="https://storymaps.arcgis.com/stories/57c9f44fd1df4155b980de331d5c0114" target="_blank">
-            Superior National Forest CHM and Classification
-          </a>
-        </h3>
-        <div class="project-preview">
-          <iframe src="https://storymaps.arcgis.com/stories/57c9f44fd1df4155b980de331d5c0114" title="Project 2"></iframe>
-        </div>
-      </div>
+    <section id="resume" class="section" data-aos="fade-up">
+      <h2>Resume</h2>
+      <p class="resume-download">
+       <a href="Nicholas_Brand_2025_ Resume.pdf" download>
+          <i class="fas fa-download"></i> Download Resume
+        </a>
+      </p>
+    </section>
 
-      <!-- Project 3 -->
-      <div class="project">
-        <h3 class="project-title">
-          <a href="https://storymaps.arcgis.com/stories/f5548d826a5c473ea3937c961cf7f769" target="_blank">
-            Geospatial Analysis of Winona's Flooding Patterns
-          </a>
-        </h3>
-        <div class="project-preview">
-          <iframe src="https://storymaps.arcgis.com/stories/f5548d826a5c473ea3937c961cf7f769" title="Project 1"></iframe>
-        </div>
-      </div>
-
-      <!-- Project 4 -->
-      <div class="project">
-        <h3 class="project-title">
-          <a href="https://storymaps.arcgis.com/stories/b13cecab5aff4da1b635a9de57c93373" target="_blank">
-            Understanding Winona, Minnesota River Flooding
-          </a>
-        </h3>
-        <div class="project-preview">
-          <iframe src="https://storymaps.arcgis.com/stories/b13cecab5aff4da1b635a9de57c93373" title="Project 2"></iframe>
-        </div>
-      </div>
-
-      <!-- Project 5 -->
-      <div class="project">
-        <h3 class="project-title">
-          <a href="https://precisionag.umn.edu/farm-precision-agriculture-research-network" target="_blank">
-            PAC On-Farm Research Network
-          </a>
-        </h3>
-        <div class="project-preview">
-          <div class="website-preview">
-            <img src="Preview Project Image On Farm Research.png" alt="PAC On-Farm Research Network Preview">
-            <div class="website-overlay">
-              <a href="https://precisionag.umn.edu/farm-precision-agriculture-research-network" target="_blank" class="visit-button">
-                Visit Website <i class="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-          </div>
-          <p class="project-description">
-            The PAC On-Farm Research Network is a collaborative initiative aimed at advancing precision agriculture practices through on-farm research and data-driven insights.
-          </p>
-        </div>
-      </div>
-
-      <!-- Project 6 -->
-      <div class="project">
-        <h3 class="project-title">
-          <a href="Nicholas_Brand_PNM.jpeg" target="_blank">
-            Precision Nitrogen Managment
-          </a>
-        </h3>
-        <div class="project-preview">
-          <div class="website-preview">
-            <img src="Nicholas_Brand_PNM.jpeg" alt="PAC On-Farm Research Network Preview">
-            <div class="website-overlay">
-              <a href="Nicholas_Brand_PNM.jpeg" target="_blank" class="visit-button">
-                View Image <i class="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-          </div>
-          <p class="project-description">
-            The PAC On-Farm Research Network is a collaborative initiative aimed at advancing precision agriculture practices through on-farm research and data-driven insights.
-          </p>
-        </div>
-      </div>
-
-      <!-- Project 7 -->
-      <div class="project">
-        <h3 class="project-title">
-          <a href="https://www.canva.com/design/DAGllNXj2mg/rVrN8Y7-i2sPTEZ8WpgU6w/view?utm_content=DAGllNXj2mg&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hf385060c9b" target="_blank">
-            Effect of Slope & Climate on Yield
-          </a>
-        </h3>
-        <div class="project-preview">
-          <div class="website-preview">
-            <img src="Nicholas_Brand_CapstoneProject_ASU_2025.png" alt="Effect of Slope & Climate on Yield">
-            <div class="website-overlay">
-              <a href="https://asu.digication.com/nicholas-brand/final-project" target="_blank" class="visit-button">
-                Visit Website <i class="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-          </div>
-          <p class="project-description">
-            The PAC On-Farm Research Network is a collaborative initiative aimed at advancing precision agriculture practices through on-farm research and data-driven insights.
-          </p>
-        </div>
-      </div>
-
+    <div class="footer">
+      <section id="contact" class="section" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:NicholasBrandMN@outlook.com" style="color: #ffd700;">NicholasBrandMN@outlook.com</a></p>
+        <p>Telegram: <a href="https://t.me/NicholasBrand" target="_blank" style="color: #ffd700;">@NicholasBrand</a></p>
+        <p>&copy; 2025 Nicholas Brand. All Rights Reserved.</p>
+      </section>  
     </div>
-  </section>
 
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="section" data-aos="fade-up">
-    <h2 style="padding-top: 150px">Testimonials</h2>
-
-
-    <div class="swiper-container testimonial-carousel">
-      <div class="swiper-wrapper">
-
-        <!-- 1 -->
-        <div class="swiper-slide testimonial-box">
-          <p class="testimonial-text">
-            <i class="fas fa-quote-left"></i>
-            Nicholas played a key role in sample processing and organization, creating labels for sampling, drying and weighing plant samples, and separating corn components for nitrogen analysis. His attention to detail and commitment to accuracy ensured high-quality data collection and analysis.
-            <i class="fas fa-quote-right"></i>
-          </p>
-          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/toshi-mizuta/" target="_blank">Katsutoshi Mizuta</a></p>
-        </div>
-
-        <!-- 2 -->
-        <div class="swiper-slide testimonial-box">
-          <p class="testimonial-text">
-            <i class="fas fa-quote-left"></i>
-            I recommend Nicholas Brand without hesitation for any academic, research, or professional opportunity. He will bring integrity, curiosity, and a team-oriented mindset to any environment. If you need any more insight into his work or character, please do not hesitate to contact me. 
-            <i class="fas fa-quote-right"></i>
-          </p>
-          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/renzo-negrini/" target="_blank">Renzo Negrini</a></p>
-        </div>
-
-        <!-- 3 -->
-        <div class="swiper-slide testimonial-box">
-          <p class="testimonial-text">
-            <i class="fas fa-quote-left"></i>
-            He demonstrated his excellence to work efficiently and independently and also to lead other workers. He accommodated the varying schedule that is common in agricultural experiments. Overall, he is the most reliable student I have worked with during my Ph.D. program.
-            <i class="fas fa-quote-right"></i>
-          </p>
-          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/seiya-wakahara-85471614b/" target="_blank">Seiya Wakahara</a></p>
-        </div>
-
-        <!-- 4 -->
-        <div class="swiper-slide testimonial-box">
-          <p class="testimonial-text">
-            <i class="fas fa-quote-left"></i>
-            What makes Nicholas stand out is his combination of technical ability and collaborative spirit. He approaches every project with curiosity and persistence.
-            <i class="fas fa-quote-right"></i>
-          </p>
-          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/jackielimn/" target="_blank">Jackie Li</a></p>
-        </div>
-
-        <!-- 5 -->
-        <div class="swiper-slide testimonial-box">
-          <p class="testimonial-text">
-            <i class="fas fa-quote-left"></i>
-            I give Nicholas my highest recommendation without reservation. Any research team would benefit from his skills, work ethic, and collaborative spirit.
-            <i class="fas fa-quote-right"></i>
-          </p>
-          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/junjun-lu-93333b317/" target="_blank">Junjun Lu</a></p>
-        </div>
-
-        <!-- 6 -->
-        <div class="swiper-slide testimonial-box">
-          <p class="testimonial-text">
-            <i class="fas fa-quote-left"></i>
-            Working with Nicholas was an absolute game changer for me and my business!
-            <i class="fas fa-quote-right"></i>
-          </p>
-          <p class="testimonial-author">- <a href="https://glowinggrimecleaning.com/" target="_blank">Danielle Pilarski</a></p>
-        </div>
-
-        <!-- 7 -->
-        <div class="swiper-slide testimonial-box">
-          <p class="testimonial-text">
-            <i class="fas fa-quote-left"></i>
-            One of the most striking aspects of Nicholas' growth has been in his development as a leader. Initially a quiet and hardworking athlete, he has grown into a confident and supportive man, someone who lifts others up and fosters a culture of camaraderie and accountability.
-            <i class="fas fa-quote-right"></i>
-          </p>
-          <p class="testimonial-author">- <a href="https://www.linkedin.com/in/chris-mayer-3808401b4/" target="_blank">Chris Mayer</a></p>
-        </div>
-      </div> <!-- End .swiper-wrapper -->
+    <div class="dark-mode-toggle" id="dark-mode-toggle">
+      <i class="fas fa-moon" id="toggle-icon"></i>
     </div>
-    <div class="testimonial-controls">
-      <div class="swiper-button-prev"><i class="fas fa-chevron-left"></i></div>
-      <button id="toggleAutoplay" title="Pause/Play">
-        <i class="fas fa-pause"></i>
-      </button>
-      <div class="swiper-button-next"><i class="fas fa-chevron-right"></i></div>
+
+    <div class="scroll-to-top" id="scroll-to-top">
+      <i class="fas fa-arrow-up"></i>
     </div>
-  </section>
 
-  <!-- Resume Section -->
-  <section id="resume" class="section" data-aos="fade-up">
-    <h2>Resume</h2>
-    <p class="resume-download">
-     <a href="NicholasBrand_HUresume_2025.pdf" download>
-        <i class="fas fa-download"></i> Download Resume
-      </a>
-    </p>
-  </section>
-
-  <!-- Footer -->
-  <div class="footer">
-  <section id="contact" class="section" data-aos="fade-up">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:NicholasBrandMN@outlook.com" style="color: #ffd700;">NicholasBrandMN@outlook.com</a></p>
-    <p>Telegram: <a href="https://t.me/NicholasBrand" target="_blank" style="color: #ffd700;">@NicholasBrand</a></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p>&copy; 2025 Nicholas Brand. All Rights Reserved.</p>
-  </section>  
-    
-  </div>
-
-  <!-- Dark Mode Toggle -->
-  <div class="dark-mode-toggle" id="dark-mode-toggle">
-    <i class="fas fa-moon" id="toggle-icon"></i>
-  </div>
-
-  <!-- Scroll-to-Top Button -->
-  <div class="scroll-to-top" id="scroll-to-top">
-    <i class="fas fa-arrow-up"></i>
-  </div>
-
-  <!-- AOS (Animate On Scroll) JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
-  <!-- Typed.js -->
+  </div> <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-
-  <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="Index.JS"></script>
 
-  <!-- Main Script -->
-  <script>
-    // Initialize AOS (Animate On Scroll)
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-
-    // Initialize Typed.js
-    document.addEventListener("DOMContentLoaded", function() {
-      const typedElement = document.querySelector(".typed");
-      if (typedElement) {
-        new Typed(".typed", {
-          strings: typedElement.getAttribute("data-typed-items").split(","),
-          typeSpeed: 100,
-          backSpeed: 50,
-          backDelay: 2000,
-          loop: true,
-        });
-      }
-    });
-
-    // Dark Mode Toggle
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    const toggleIcon = document.getElementById('toggle-icon');
-    const body = document.body;
-
-    // Check for stored dark mode preference
-    if (localStorage.getItem("dark-mode") === "enabled") {
-      body.classList.add("dark-mode");
-      toggleIcon.classList.remove("fa-moon");
-      toggleIcon.classList.add("fa-sun");
-    }
-
-    darkModeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-      if (body.classList.contains('dark-mode')) {
-        localStorage.setItem("dark-mode", "enabled");
-        toggleIcon.classList.remove('fa-moon');
-        toggleIcon.classList.add('fa-sun');
-      } else {
-        localStorage.setItem("dark-mode", "disabled");
-        toggleIcon.classList.remove('fa-sun');
-        toggleIcon.classList.add('fa-moon');
-      }
-    });
-
-    // Scroll-to-Top Button
-    const scrollToTopButton = document.getElementById('scroll-to-top');
-
-    window.addEventListener('scroll', () => {
-      const halfPageHeight = document.documentElement.scrollHeight / 2;
-
-      if (window.scrollY > halfPageHeight) {
-        scrollToTopButton.classList.add('show');
-      } else {
-        scrollToTopButton.classList.remove('show');
-      }
-    });
-
-    scrollToTopButton.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-
-    // Navbar Toggle
-    const navbarToggle = document.getElementById('navbar-toggle');
-    const replacementToggle = document.getElementById('replacement-toggle');
-    const navbar = document.querySelector('.navbar');
-    const mainContent = document.getElementById('main-content');
-
-    navbarToggle.addEventListener('click', () => {
-      navbar.classList.toggle('hidden');
-      mainContent.classList.toggle('navbar-hidden');
-      replacementToggle.classList.toggle('visible'); // Show/hide replacement button
-    });
-
-    replacementToggle.addEventListener('click', () => {
-      navbar.classList.toggle('hidden');
-      mainContent.classList.toggle('navbar-hidden');
-      replacementToggle.classList.toggle('visible'); // Show/hide replacement button
-    });
-
-  </script>
-    // Testimonials Slideshow
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script>
-    var swiper = new Swiper('.testimonial-carousel', {
-      slidesPerView: 3,
-      spaceBetween: 40,
-      loop: true,
-      autoplay: {
-        delay: 4000,
-        disableOnInteraction: false,
-      },
-      navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        },
-      breakpoints: {
-        1024: { slidesPerView: 3 },
-        768: { slidesPerView: 2 },
-        320: { slidesPerView: 1 }
-      }
-    });
-
-    const toggleButton = document.getElementById('toggleAutoplay');
-      let isPlaying = true;
-
-      toggleButton.addEventListener('click', () => {
-        if (isPlaying) {
-          swiper.autoplay.stop();
-          toggleButton.innerHTML = '<i class="fas fa-play"></i>';
-        } else {
-          swiper.autoplay.start();
-          toggleButton.innerHTML = '<i class="fas fa-pause"></i>';
-        }
-        isPlaying = !isPlaying;
-      });
-  </script>
-  <script>
-
-   
-  </script>
 </body>
 </html>
-
-
-
-
